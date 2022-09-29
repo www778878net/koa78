@@ -1,6 +1,6 @@
 {
   "name": "@7788/koa78",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "nodejs koa78封装",
   "main": "dist/index.js",
   "types": "src/index.ts",
@@ -24,7 +24,7 @@
     "nodejs"
   ],
   "scripts": {
-    "dev": "cross-env NODE_ENV=dev nodemon -e ts --exec ts-node src/index.ts",    
+    "dev": "cross-env NODE_ENV=dev nodemon -e ts --exec ts-node src/index.ts",
     "postpublish": "git push origin --all && git push origin --tags",
     "postversion": "npm publish",
     "preversion": "npm test ",
