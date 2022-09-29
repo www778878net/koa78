@@ -26,7 +26,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=dev nodemon -e ts --exec ts-node src/index.ts",
     "postpublish": "git push origin --all && git push origin --tags",
-    "postversion": "npm publish",
+    "postversion": "npm publish --access public",
     "preversion": "npm test ",
     "test": "tsc   && mocha --config c:\\test7788\\test\\localtest.json   --reporter spec  -t 5000  --exit",
     "build": "tsc -p"
