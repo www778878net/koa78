@@ -24,8 +24,7 @@
     "nodejs"
   ],
   "scripts": {
-    "dev": "cross-env NODE_ENV=dev nodemon -e ts --exec ts-node src/index.ts",
-    "postgit": "npm version patch && npm publish && git push --all",
+    "dev": "cross-env NODE_ENV=dev nodemon -e ts --exec ts-node src/index.ts",    
     "postpublish": "git push origin --all && git push origin --tags",
     "postversion": "npm publish",
     "preversion": "npm test ",

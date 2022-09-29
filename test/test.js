@@ -1,7 +1,6 @@
 'use strict';
 const expect = require('chai').expect;
 const Mysql = require('../dist/index').default;
-const UpInfo = require('node-upinfo').default
 var iconv = require('iconv-lite');
 var fs = require('fs'); 
 console.log(process.argv)
