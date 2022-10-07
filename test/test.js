@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 const expect = require('chai').expect;
 const Mysql = require('../dist/index').default;
 var iconv = require('iconv-lite');

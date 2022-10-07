@@ -1,4 +1,4 @@
-import Router = require("koa-router");
+﻿import Router = require("koa-router");
 const router: Router = new Router();
 
 router.get('/', (ctx: any) => {

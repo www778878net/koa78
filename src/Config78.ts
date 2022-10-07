@@ -1,3 +1,3 @@
-export default class Config78 {
+﻿export default class Config78 {
 
 }
