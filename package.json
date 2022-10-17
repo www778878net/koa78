@@ -25,11 +25,12 @@
   ],
   "scripts": {
     "dev": "cross-env NODE_ENV=dev nodemon -e ts --exec ts-node src/index.ts",
+    "serve": "node .\\dist\\index.js",
     "postpublish": "git push origin --all && git push origin --tags",
     "postversion": "npm publish --access public",
     "preversion": "npm test ",
     "test": "tsc   && mocha --config c:\\test7788\\test\\localtest.json   --reporter spec  -t 5000  --exit",
-    "build": "tsc -p"
+    "build": "tsc  "
   },
   "engines": {
     "node": ">=14.0.0"
@@ -48,6 +49,8 @@
     "typescript": "^4.8.4"
   },
   "dependencies": {
+    "co": "^4.6.0",
+    "dayjs": "^1.11.5",
     "koa": "^2.13.4",
     "koa-router": "^12.0.0"
   },

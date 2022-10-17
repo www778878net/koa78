@@ -1,11 +1,46 @@
 ﻿import Router = require("koa-router");
+var co = require('co');
 const router: Router = new Router();
 
-router.get('/', (ctx: any) => {
-    ctx.body = 'router index';
-});
-router.get('/home', (ctx: any) => {
-    ctx.body = 'router home';
-});
+router.all('/:msys/:apiobj/:apifun', co.wrap(function* (ctx, next) {
+     
+    const msys = ctx.params.msys;
+    const apiobj = ctx.params.apiobj;
+    const apifun = ctx.params.apifun;
+    var checkmes = "";
+
+    if (apifun.indexOf('_') === 0) {
+        checkmes = 'cannot read private fun';
+    }
+    if (msys.indexOf('dll') === 0) {
+        checkmes = 'cannot read private msys';
+    }
+    if (checkmes !== "") {
+        ctx.body = checkmes;
+        return;
+    }
+
+
+    try { 
+        const Base78 = require('./' + msys + '/' + apiobj);   
+        var base78 = new Base78.default(ctx); 
+        ctx.body = yield base78.out(apifun); 
+    } catch (e) {
+        //这里不可能出错 前面截取了 
+        console.log("router cannot in this-" + JSON.stringify(e));
+        ctx.body =
+        {
+            res: -996
+            , back: e
+            , errmsg: "routes err"
+            , kind: "json"
+        }
+
+    } 
+
+   
+})
+);
+ 
 
 export default router;

@@ -1,12 +1,41 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const Router = require("koa-router");
+var co = require('co');
 const router = new Router();
-router.get('/', (ctx) => {
-    ctx.body = 'router index';
-});
-router.get('/home', (ctx) => {
-    ctx.body = 'router home';
-});
+router.all('/:msys/:apiobj/:apifun', co.wrap(function* (ctx, next) {
+    console.log(ctx);
+    const msys = ctx.params.msys;
+    const apiobj = ctx.params.apiobj;
+    const apifun = ctx.params.apifun;
+    var checkmes = "";
+    if (apifun.indexOf('_') === 0) {
+        checkmes = 'cannot read private fun';
+    }
+    if (msys.indexOf('dll') === 0) {
+        checkmes = 'cannot read private msys';
+    }
+    if (checkmes !== "") {
+        ctx.body = checkmes;
+        return;
+    }
+    try {
+        const Base78 = require('./' + msys + '/' + apiobj);
+        var base78 = new Base78.default(ctx);
+        //console.log('body')
+        ctx.body = yield base78.out(apifun);
+    }
+    catch (e) {
+        //这里不可能出错 前面截取了 
+        console.log("router cannot in this-" + e);
+        ctx.body =
+            {
+                res: -996,
+                back: e,
+                errmsg: "routes err",
+                kind: "json"
+            };
+    }
+}));
 exports.default = router;
 //# sourceMappingURL=routers.js.map
