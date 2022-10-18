@@ -29,7 +29,7 @@
     "postpublish2": "git push origin --all && git push origin --tags",
     "postversion2": "npm publish --access public",
     "preversion": "npm test ",
-    "test": "tsc   && mocha --config  .\\test\\config.json   --reporter spec  -t 5000  --exit",
+    "test": "tsc   && mocha --config  config.json   --reporter spec  -t 5000  --exit",
     "build": "tsc  "
   },
   "engines": {
