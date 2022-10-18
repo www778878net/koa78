@@ -10,7 +10,7 @@
 
 </div>
 
-## API文档地址：[http://www.778878.net/docs/#/koa78-base78/](http://www.778878.net/docs/#/koa78-base78/)
+## API文档地址：[http://www.778878.net/docs/#/koa78/](http://www.778878.net/docs/#/koa78/)
 ## 反馈qq群(点击加群)：[323397913](https://qm.qq.com/cgi-bin/qm/qr?k=it9gUUVdBEDWiTOH21NsoRHAbE9IAzAO&jump_from=webapi&authKey=KQwSXEPwpAlzAFvanFURm0Foec9G9Dak0DmThWCexhqUFbWzlGjAFC7t0jrjdKdL)
 
 ## 背景 
@@ -60,7 +60,11 @@
 详见API文档地址
 
 ## DEMO 
-
+1. git clone https://github.com/www778878net/koa78
+2. yarn install (如果没有yarn npm install yarn -g)
+3. 打开cmd cd到koa78目录下 运行npm start
+4. 打开浏览器 看效果http://localhost:88/Api7822/Test78/test
+5. 。。。自己写点东西试试吧
 ```ts
 //最简应用 在koa78目录下
 npm start

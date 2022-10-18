@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const koa78_base78_1 = require("@www778878net/koa78-base78");
-class Test78 extends koa78_base78_1.default {
+class Test78 extends koa78_base78_1.Base78 {
     constructor(ctx) {
         super(ctx);
         //this.uidcid = "uid";
@@ -22,9 +22,19 @@ class Test78 extends koa78_base78_1.default {
     test() {
         const self = this;
         const up = self.up;
-        console.log("test in" + up.uname);
+        console.log("test in test" + up.uname);
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             resolve("看到我说明路由ok,中文ok,无权限调用OK" + up.parsn);
+            return;
+        }));
+    }
+    getConfig78() {
+        const self = this;
+        const up = self.up;
+        console.log("test in getConfig78" + up.uname);
+        console.log(self);
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            resolve({ Argv: self.Argv, Config: self.Config });
             return;
         }));
     }

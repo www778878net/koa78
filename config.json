@@ -1,9 +1,9 @@
 {
   "mysql": {
-    "host": "localhost",
-    "port": "3306",
-    "password": "testpwd",
+    "host": "192.168.31.77",
+    "port": "3300",
+    "password": "7788test",
     "database": "testdb",
-    "user": "testuser"
+    "user": "7788test"
   }
 }
