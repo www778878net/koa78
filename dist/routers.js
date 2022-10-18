@@ -3,8 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Router = require("koa-router");
 var co = require('co');
 const router = new Router();
+const Util = require('util');
 router.all('/:msys/:apiobj/:apifun', co.wrap(function* (ctx, next) {
-    console.log(ctx);
     const msys = ctx.params.msys;
     const apiobj = ctx.params.apiobj;
     const apifun = ctx.params.apifun;
@@ -22,12 +22,11 @@ router.all('/:msys/:apiobj/:apifun', co.wrap(function* (ctx, next) {
     try {
         const Base78 = require('./' + msys + '/' + apiobj);
         var base78 = new Base78.default(ctx);
-        //console.log('body')
         ctx.body = yield base78.out(apifun);
     }
     catch (e) {
         //这里不可能出错 前面截取了 
-        console.log("router cannot in this-" + e);
+        console.log("router cannot in this-" + Util.inspect(e));
         ctx.body =
             {
                 res: -996,

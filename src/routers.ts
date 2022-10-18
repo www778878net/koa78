@@ -1,6 +1,7 @@
 ﻿import Router = require("koa-router");
 var co = require('co');
 const router: Router = new Router();
+const Util = require('util');
 
 router.all('/:msys/:apiobj/:apifun', co.wrap(function* (ctx, next) {
      
@@ -27,15 +28,14 @@ router.all('/:msys/:apiobj/:apifun', co.wrap(function* (ctx, next) {
         ctx.body = yield base78.out(apifun); 
     } catch (e) {
         //这里不可能出错 前面截取了 
-        console.log("router cannot in this-" + JSON.stringify(e));
+        console.log("router cannot in this-" + Util.inspect(e));
         ctx.body =
         {
             res: -996
             , back: e
             , errmsg: "routes err"
             , kind: "json"
-        }
-
+        } 
     } 
 
    

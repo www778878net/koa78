@@ -25,11 +25,11 @@
   ],
   "scripts": {
     "dev": "cross-env NODE_ENV=dev nodemon -e ts --exec ts-node src/index.ts",
-    "start": "node .\\dist\\index.js",
+    "start": "tsc   && node .\\dist\\index.js",
     "postpublish2": "git push origin --all && git push origin --tags",
     "postversion2": "npm publish --access public",
     "preversion": "npm test ",
-    "test": "tsc   && mocha --config c:\\test7788\\test\\localtest.json   --reporter spec  -t 5000  --exit",
+    "test": "tsc   && mocha --config  .\\test\\config.json   --reporter spec  -t 5000  --exit",
     "build": "tsc  "
   },
   "engines": {
@@ -49,6 +49,7 @@
     "typescript": "^4.8.4"
   },
   "dependencies": {
+    "@www778878net/koa78-base78": "^0.0.2",
     "@www778878net/koa78-upinfo": "^0.0.105",
     "co": "^4.6.0",
     "dayjs": "^1.11.5",

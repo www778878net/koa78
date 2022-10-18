@@ -5,7 +5,7 @@ const Koa = require("koa");
 const routers_1 = require("./routers");
 const app = new Koa();
 //Config78.init();
-let port = 83;
+let port = 88;
 app.use(routers_1.default.routes());
 app.listen(port, () => {
     console.log('listen  OK' + port);

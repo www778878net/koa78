@@ -10,12 +10,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const koa78_base78_1 = require("@www778878net/koa78-base78");
-class Test extends koa78_base78_1.default {
+class Test78 extends koa78_base78_1.default {
     constructor(ctx) {
         super(ctx);
         //this.uidcid = "uid";
-        this.tbname = "Services78";
-        //������Ǳ�
+        this.tbname = "Test78";
+        //这个不是表
         this.colsImp = [];
         this.cols = this.colsImp.concat(this.colsremark);
     }
@@ -24,10 +24,10 @@ class Test extends koa78_base78_1.default {
         const up = self.up;
         console.log("test in" + up.uname);
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            resolve("������˵��·��ok,����ok" + up.parsn);
+            resolve("看到我说明路由ok,中文ok,无权限调用OK" + up.parsn);
             return;
         }));
     }
 }
-exports.default = Test;
-//# sourceMappingURL=Test.js.map
+exports.default = Test78;
+//# sourceMappingURL=Test78.js.map
