@@ -1,6 +1,13 @@
-export default class Test {
-    constructor() {
-         
+import Base7817 from "../dllbase/Base7817";
+export default class Test extends Base7817 {
+    constructor(ctx: any) {
+
+        super(ctx);
+        //this.uidcid = "uid";
+        this.tbname = "Services78";
+        //这个不是表
+        this.colsImp = [];
+        this.cols = this.colsImp.concat(this.colsremark);
     }
 
     testfun() {

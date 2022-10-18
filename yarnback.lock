@@ -139,6 +139,13 @@
   resolved "https://registry.yarnpkg.com/@ungap/promise-all-settled/-/promise-all-settled-1.1.2.tgz#aa58042711d6e3275dd37dc597e5d31e8c290a44"
   integrity sha512-sL/cEvJWAnClXw0wHk85/2L0G6Sj8UB0Ctc1TEMbKSsmpRosqhwj9gWgFRZSrBr2f9tiXISwNhCPmlfqUqyb9Q==
 
+"@www778878net/koa78-upinfo@^0.0.105":
+  version "0.0.105"
+  resolved "https://registry.yarnpkg.com/@www778878net/koa78-upinfo/-/koa78-upinfo-0.0.105.tgz#77c2b019965f78c353ae5404463288abaaf8ee83"
+  integrity sha512-GNJ4a1u4dBxK/NmVtInmtLJXdraaiM4cYe2uNmkKUHqihWv3rWc8OIxrSX2r9moAfMzq1DPfDT2Yu2iJ8MmJWQ==
+  dependencies:
+    dayjs "^1.11.5"
+
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
