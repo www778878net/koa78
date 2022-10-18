@@ -1,6 +1,7 @@
 ﻿'use strict';
 const expect = require('chai').expect;
-const Mysql = require('../dist/index').default;
+const UpInfo = require('@www778878net/koa78-upinfo').default;
+
 var iconv = require('iconv-lite');
 var fs = require('fs'); 
 console.log(process.argv)
@@ -19,3 +20,12 @@ function loadjson(filepath) {
     return data;
 }
 
+describe("guid", () => {
+    it('guid ', async () => {
+
+        let up = new UpInfo(null);
+
+        let newid = up.getNewid()
+        expect(newid.length).to.equal(36);
+    });
+});
