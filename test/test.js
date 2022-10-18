@@ -1,7 +1,10 @@
 ﻿'use strict';
 const expect = require('chai').expect;
 const UpInfo = require('@www778878net/koa78-upinfo').default;
+const restler = require('restler');
+const Promise78 = require('@www778878net/promise78').default;
 
+const app = require('../dist/index');
 var iconv = require('iconv-lite');
 var fs = require('fs'); 
 console.log(process.argv)
@@ -20,12 +23,19 @@ function loadjson(filepath) {
     return data;
 }
 
-describe("guid", () => {
-    it('guid ', async () => {
+describe("no power", () => {
+    it('test78 ', async () => {
+        function test() {
+            return new Promise78((resolve, reject) => {
+                restler.get("http://localhost:88/Api7822/Test78/test", { data: { pars: ["test"] } })
+                    .on('complete', function (back) {
+                        resolve(back) 
+                    }); 
+            })
+        }
+        let [err, res] = await test();
+        expect(err).to.be.null;
 
-        let up = new UpInfo(null);
-
-        let newid = up.getNewid()
-        expect(newid.length).to.equal(36);
+        expect(res["back"]).to.equal("看到我说明路由ok,中文ok,无权限调用OK");
     });
 });

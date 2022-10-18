@@ -46,11 +46,13 @@
     "iconv-lite": "^0.6.3",
     "mocha": "^9.0.2",
     "nodemon": "^2.0.20",
+    "restler": "^3.4.0",
     "typescript": "^4.8.4"
   },
   "dependencies": {
     "@www778878net/koa78-base78": "^0.0.2",
     "@www778878net/koa78-upinfo": "^0.0.105",
+    "@www778878net/promise78": "^0.0.2",
     "co": "^4.6.0",
     "dayjs": "^1.11.5",
     "koa": "^2.13.4",
