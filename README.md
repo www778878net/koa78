@@ -17,7 +17,7 @@
 1. 十八年ERP开发经验 十年云开发经验 十五年股票期货投资经验 十年投资分析平台开发经验
 2. 技术不高 了解业务 擅长解决生产经营实际问题
 3. 逐步把多年开发优化 并且在一直稳定运行中的项目开源
-
+4. 因为自己在用 会一直维护 可放心用于生产环境
 
 ## 简介 introduction
 
@@ -59,7 +59,7 @@
 
 详见API文档地址
 
-## DEMO 
+## DEMO init
 1. git clone https://github.com/www778878net/koa78
 2. yarn install (如果没有yarn npm install yarn -g)
 3. 打开cmd cd到koa78目录下 运行npm start
@@ -70,6 +70,30 @@
 npm start
 //然后 即可访问api
 http://localhost:88/Api7822/Test78/test
+```
+
+## Demo 增删查改
+1. 建好表testdb
+2. 建好数据字典
+3. 发布 (增删查改 排序 分页 筛选 批量新增 等N多常用API就可以直接调用了)
+4. http://localhost:88/Api7822/TestMenu/testtb/get 试试效果
+5. 具体使用方法见文档
+
+```ts
+export default class testtb extends Base78 {
+    constructor(ctx: any) {
+
+        super(ctx);
+        //this.uidcid = "uid";//默认是cid
+        this.tbname = "testtb";
+
+        this.colsImp = [
+            //类别   项目   设置值
+            "kind", "item", "data"
+        ];
+        this.cols = this.colsImp.concat(this.colsremark);
+    } 
+}
 ```
 
 ## OTHER

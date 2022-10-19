@@ -32,7 +32,6 @@ class Test78 extends koa78_base78_1.Base78 {
         const self = this;
         const up = self.up;
         console.log("test in getConfig78" + up.uname);
-        console.log(self);
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             resolve({ Argv: self.Argv, Config: self.Config });
             return;
