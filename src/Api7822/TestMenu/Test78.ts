@@ -11,6 +11,18 @@ export default class Test78 extends Base78 {
         this.cols = this.colsImp.concat(this.colsremark);
     }
 
+    testredis(): Promise<string> {
+        const self = this;
+        const up = self.up;
+      
+        return new Promise(async (resolve, reject) => {
+            let setback = await self.redis.set("testitem", 8, 60);
+            let getback = await self.redis.get("testitem")
+            resolve(getback);
+            return;
+        })
+    }
+
     test(): Promise<string> {
         const self = this;
         const up = self.up;
