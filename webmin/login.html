@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=":动态VPS 挂机宝 混拨VPS PPTP VPN 推广平台网赚平台 淘宝六年五钻信誉 价格最便宜 机器最稳定 主机性能最强 平台最智能" />
+    <meta name="keywords" content="网赚平台、互点平台、动态VPS、挂机宝、待办事项管理系统软件、日记帐管理系统软件、7788、免费管理软件" />
+    <title> 让工作更轻松</title>
+    <!--以下h+框架需要-->
+    <script src="//libs.baidu.com/jquery/2.1.4/jquery.min.js">  </script>
+    <script>
+    !window.jQuery && document.write(unescape('%3Cscript src="/js/base/jquery-1.11.1.min.js"%3E%3C/script%3E'));
+    !window.jQuery && document.write(unescape('%3Cscript src="/js/base/jquery-ui-1.10.3.custom.min.js"%3E%3C/script%3E'));
+    </script>
+    <link rel="stylesheet" href="/static/css/hplus/app.css" type="text/css" />
+    <link rel="stylesheet" href="/static/css/hplus/table.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/static/css/hplus/animate.min.css" type="text/css" />
+    <link rel="stylesheet" href="/static/css/hplus/font-awesome.min93e3.css?v=4.4.0" type="text/css" />
+    <!--以上h+框架需要-->
+    <script src="/js/dllbase/full78172.js?v=0.1"></script>
+
+</head>
+<body class="fixed-sidebar full-height-layout gray-bg  pace-done" style="overflow:hidden">
+    <div class="app app-header-fixed " id="main78"></div>
+    <link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.0/css/bootstrap.min.css">
+    <script src="//cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script>
+$(function () {
+config78.init({ system: localStorage.getItem("systemnow") }, cb);
+    function cb() {
+        Script78.add("dllbase/md578.js");
+    var headtb_page = $("#headtb_page");
+    var id = "tb_page";
+    var title = "登录注册";
+        headtb_page.find(".pagedes").html(title + '帮助<span class="caret"></span>');
+
+    //追加按钮
+        var tmp = '<button type="button" class="btn btn-sm btn-primary" data-target="#tab-wx"   data-toggle="tab"   >扫码登录</button>';    
+        tmp += '<button  type="button" class="btn btn-sm btn-success " data-target="#tab-u"   data-toggle="tab" >密码登录</button>';
+        tmp += '<button  type="button" class="btn btn-sm btn-danger " data-target="#tab-login"   data-toggle="tab" >用户注册</button>';
+        //var tmp = '<button  type="button" class="btn btn-sm btn-success " data-target="#tab-u"   data-toggle="tab" >密码登录</button>';
+        headtb_page.children(".window_top").append(tmp);
+
+    //说明
+    var des = [".新用户请先注册"];
+    var desstr = '';
+    des.forEach(function (item) {
+        desstr += '<li><a href="#">' + item + '</a></li>';
+
+    });
+    desstr += '<li><a href="#">.常用： 单击表头排序 回车或TAB跳到下一格 ctrl + f查找 ctrl + s保存 Esc取消 表格可直接复制粘贴到EXCEL</a> </li>'
+    desstr += '<li><a href="#">.如需帮助 客服电话：0736888888或点击下方客服QQ<a href="http://wpa.qq.com/msgrd?v=3&amp;uin=657225485&amp;site=qq&amp;menu=yes" target="_blank">                    <img title="点此联系客服" border="0" alt="点此联系客服" src="/Content/Images/pa.gif"> </a> </a> </li>';
+    $("#des" + id).append(desstr);
+
+    //添加一个DIV作表单主体
+    headtb_page.after("<div class='table-responsive' id='div_tb" + id + "'></div>");
+    var div = $("#div_tb" + id);
+
+    div.load('/html17/basic/loginbase.html #waitload', function () {          
+        //div.html($("#waitload").html());
+        u = $("#u");
+        p = $("#p");
+        cbsave = $("#cbSave");
+        regu = $("#regu");
+        regp = $("#regp");
+        qq = $("#qq");
+        mobile = $("#mobile");
+        mobilevz = $("#mobilevz");
+        truename = $("#truename");
+        u.validate78('bind', { must: true });
+        qq.validate78('bind', { must: true, num: true });
+        mobile.validate78('bind', { must: true, mobile: true });
+
+        loadloginpic();
+       
+    })
+        }
+
+        var u, p, regu, regp, qq, mobile, loginimgwx, regimgwx, cbsave, truename, mobilevz;
+        var loginscanid;//二维码流水
+        var bindingu, bindingp;
+
+    //载入 登录二维码 启动登录线程
+        function loadloginpic() {
+            //api78({
+            //    url: "api7819/ucenter/lovers_weixin2card", m: "getTicketTmp"
+            //    , pars: ["login", ""]
+            //    , back: function (data) {
+            //       //console.log(data)
+            //        //返回的就是ticket
+            //        loginscanid = data;
+            //        $("#loginimgwx").attr("src", "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=" + encodeURIComponent(loginscanid));
+            //        //setTimeout(loginscan, 5000);
+            //    }
+            //});
+
+            //注册
+            $("#btnReg").click(function () {
+                if (!regu.validate78('yzshow')) {
+                    regu.focus();
+                    return;
+                }
+
+                if (!mobile.validate78('yzshow')) {
+                    mobile.focus();
+                    return;
+                }
+                if (!qq.validate78('yzshow')) {
+                    qq.focus();
+                    return;
+                }
+                if (!mobilevz.validate78('yzshow')) {
+                    mobilevz.focus();
+                    return;
+                }
+                var uname = regu.val();
+                var pwd = regp.val();
+                if (pwd.length != 32)
+                    pwd = $.md5(pwd);
+ 
+
+                api78({
+                    url: "api7822/ucenter/lovers", m: "reg"
+                    , pars: [regu.val(), pwd, qq.val(), mobile.val(), "", truename.val()
+                        , mobilevz.val()]
+                    , back: function (data) {
+                        if (data["sid_web"].length == 36) {
+                            loginwaitmax = 1;
+                            localStorage.setItem("uname", uname);
+                            localStorage.setItem("sid", data["sid_web"]);
+                            localStorage.setItem("cid", data["idcodef"]);
+                            localStorage.setItem("coname", data["coname"]);
+                            localStorage.setItem("sidref", new Date());
+                            location.href = "/count_api.html";
+                            config78.setRightTop();
+                        }
+                        else {
+                            if (typeof data == 'string')
+                                alert78(data);
+                            else
+                                alert78(data[0]);
+                        }
+
+                    }
+                });
+            })
+
+            //手机验证码
+            $("#btnMobilevz").click(function () {
+                if (!mobile.validate78('yzshow')) {
+                    mobile.focus();
+                    return;
+                }
+                api78({
+                    url: "api7822/ucenter/lovers", m: "getMobileVzReg"
+                    , pars: [mobile.val()]
+                    , back: function (data) {
+
+                        alert78(data);
+                    }
+                });
+            });
+
+            $("#btnLogin").click(function () {
+                var uname = u.val();
+                var pwd = p.val();
+                if (pwd.length != 32)
+                    pwd = $.md5(pwd);
+                var saveme = false;
+
+                if (cbsave.prop("checked")) {
+                    saveme = true;
+                    localStorage.setItem("u", uname);
+                    localStorage.setItem("p", pwd);
+                    localStorage.setItem("cbSave", true);
+                }
+                else {
+                    localStorage.removeItem("u");
+                    localStorage.removeItem("p");
+                    localStorage.removeItem("cbSave");
+                }
+                api78({
+                    url: "api7822/ucenter/lovers", m: "login"
+                    , pars: [uname, pwd, saveme]
+                    , back: function (data) {
+                        if (data["sid_web"].length == 36) {
+                            if (uname != "guest") loginwaitmax = 1;
+                            localStorage.setItem("uname", uname);
+                            localStorage.setItem("sid", data["sid_web"]);
+                            localStorage.setItem("cid", data["idcodef"]);
+                            localStorage.setItem("coname", data["coname"]);
+                            localStorage.setItem("sidref", new Date());
+                            //winlogin.find("a.glyphicon-remove").trigger("click");
+                            location.href = "/count_api.html";
+                            config78.setRightTop();
+                        }
+                        else {
+                            if (typeof data == 'string')
+                                alert78(data);
+                            else
+                                alert78(data[0]);
+                        }
+                    }
+                });
+            })
+        }
+
+        var loginscanid = 0;
+        var loginwaitmax = 60;//
+
+        function loginscan() {
+            //扫码登录
+            //api78({
+            //    url: "api7819/ucenter/lovers", m: "loginWeixinScan17"
+            //    , pars: [loginscanid]
+            //    , back: function (data) {
+            //       //console.log(data)
+            //        if (data["new"] == "wait") {
+            //            loginwaitmax--;
+            //            if (loginwaitmax <= 0)
+            //                return;
+
+            //            setTimeout(loginscan, 5000);
+            //            return;
+            //        }
+            //        if (data.length != 5) return;
+            //        localStorage.setItem("cbSave", true);
+            //        localStorage.setItem("uname", data[3]);
+            //        localStorage.setItem("sid", data[0]);
+            //        localStorage.setItem("cid", data[1]);
+            //        localStorage.setItem("coname", data[2]);
+            //        localStorage.setItem("sidref", new Date());
+            //        //winlogin.find("a.glyphicon-remove").trigger("click");
+            //        alert78("登录成功");
+            //        location.href = "/html17/" + config78.setting.system + ".html";
+            //       //console.log("断点:" + config78.setting.system);
+            //        config78.setRightTop();
+
+                    
+            //    }
+            //});
+        }
+})
+    </script>
+</body>
+</html>

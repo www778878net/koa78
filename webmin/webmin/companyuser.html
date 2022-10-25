@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta name="description" content="免费无任何功能及用户数限制的web版股票期货、自动交易、智能提醒、7788、免费管理软件 " />
+    <meta name="keywords" content="web版、股票期货、自动交易、股票历史行情、智能提醒、7788、免费管理软件" />
+    <title> 让工作更轻松</title>
+    <!--以下h+框架需要-->
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js">  </script>
+    <script>
+    !window.jQuery && document.write(unescape('%3Cscript src="/js/base/jquery-1.11.1.min.js"%3E%3C/script%3E'));
+    !window.jQuery && document.write(unescape('%3Cscript src="/js/base/jquery-ui-1.10.3.custom.min.js"%3E%3C/script%3E'));
+    </script>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="http://down.7788soft.com/static/css/hplus/animate.min.css" type="text/css" />
+    <link rel="stylesheet" href="/static/css/hplus/font-awesome.min93e3.css?v=4.4.0" type="text/css" />
+    <link rel="stylesheet" href="https://libs.baidu.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <!--以上h+框架需要-->
+    <link rel="stylesheet" href="/static/css/hplus/app.css" type="text/css" />
+    <link rel="stylesheet" href="/static/css/hplus/table.css" type="text/css" />
+    <script src="/js/dllbase/full78172.js?v=0.1"></script>
+    <script src="/js/dllbase/dgv78172.js?v=0.1"></script>
+</head>
+<body class="fixed-sidebar full-height-layout gray-bg  pace-done" style="overflow:hidden">
+    <div class="app app-header-fixed " id="main78"></div>
+
+    <script src="http://libs.baidu.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script>
+$(function () {
+config78.init({ system: localStorage.getItem("systemnow") }, cb);
+var dgv = new dgv78();
+var id = "tb_page";
+
+function cb() {
+        var showdefmenu = $.getUrlParam("isceo");
+        if (showdefmenu == "1") showdefmenu = true;
+        else showdefmenu = false;
+        dgv.init({
+           　 url: "api7817/ucenter/companysuser"
+            , cache: "sid", title: "帐套用户"
+            , des: [
+                '.本系统支持多用户操作多帐套 方便分厂分店管理', '.本系统支持多用户同时操作 方便分工管理'
+                , '.仅有创建人可添加成员 请勿添加陌生人 免遭不必要之损失']
+            , cols: [{ name: "uname", head: '用户', v: { must: true }, tooltip: '输入要添加进本帐套的用户名' }
+                , { name: "des", head: '说明' }
+            ]
+            , oninihtml: oninihtmlyu, onmodify: onmodifyyu, showdefmenu: showdefmenu
+            , loadrowspars: [localStorage.getItem("cid")]
+        });
+        }
+
+        function oninihtmlyu() {
+
+        }
+
+        function onmodifyyu(row) {
+
+            if (row.find("td:eq(0) :text").val() == localStorage.getItem("uname")) {
+                alert78("不能修改自己哦..亲");
+                return false;
+            }
+            return true;
+        }
+})
+    </script>
+</body>
+</html>

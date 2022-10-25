@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=":动态VPS 挂机宝 混拨VPS PPTP VPN 推广平台网赚平台 淘宝六年五钻信誉 价格最便宜 机器最稳定 主机性能最强 平台最智能" />
+    <meta name="keywords" content="网赚平台、互点平台、动态VPS、挂机宝、待办事项管理系统软件、日记帐管理系统软件、7788、免费管理软件" />
+    <title> 让工作更轻松</title>
+    <!--以下h+框架需要-->
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js">  </script>
+    <script>
+    !window.jQuery && document.write(unescape('%3Cscript src="/js/base/jquery-1.11.1.min.js"%3E%3C/script%3E'));
+    !window.jQuery && document.write(unescape('%3Cscript src="/js/base/jquery-ui-1.10.3.custom.min.js"%3E%3C/script%3E'));
+    </script>
+
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="http://down.7788soft.com/static/css/hplus/animate.min.css" type="text/css" />
+    <link rel="stylesheet" href="/static/css/hplus/font-awesome.min93e3.css?v=4.4.0" type="text/css" />
+    <link rel="stylesheet" href="https://libs.baidu.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <!--以上h+框架需要-->
+    <link rel="stylesheet" href="/static/css/hplus/app.css" type="text/css" />
+    <link rel="stylesheet" href="/static/css/hplus/table.css" type="text/css" />
+    <script src="/js/dllbase/full78172.js?v=0.1"></script>
+</head>
+<body class="fixed-sidebar full-height-layout gray-bg  pace-done" style="overflow:hidden">
+    <div class="app app-header-fixed " id="main78"></div>
+
+    <script src="http://libs.baidu.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://down.7788soft.com/static/css/datepicker/datepicker.css" type="text/css" />
+    <script src="http://down.7788soft.com/js/base/bootstrap-datepicker.min.js"></script>
+<script>
+    $(function () {
+        Script78.add("dllbase/dgv78172.js").done(function () {
+            config78.init({ system: "mm" }, cb);
+        })
+ 
+
+        var dgv;
+        var cbpt;
+        var id = "tb_page";
+        function cb() {
+            dgv = new dgv78();
+            dgv.init({
+                  url: "api7817/services/sys_sql" 
+                , cache: "sid", title: "SQL效率"
+                , des: [".平时不优化 优化看这里"]
+                , cols: [{ name: "cmdtext", head: 'SQL语句' }
+                    , { name: "num", head: '次数' }
+                    , { name: "dlong", head: '耗时' }
+                    , { name: "downlen", head: '下载字节' }
+                ], showdefmenu: false, oninihtml: onini, onloadbef: onloadbef
+                , divtop: '<button type="button" id="clear' + id + '" class="btn btn-sm btn-primary" >清空</button>'
+                +'<div class="input-group input-group-sm">'
+                +'<select id="cbpt'+id+'" name="account" class="form-control"><option>ali</option>'
+                +'<option>qq</option></select>'
+                + '</div>'
+            });
+        }
+
+        function onloadbef() {
+            if (cbpt.val() == "qq")
+                dgv.settings.apipt = "qq";
+            else
+                dgv.settings.apipt = null;
+             
+            dgv.loadrows();
+        }
+        
+        function onini() {
+            cbpt = $("#cbpt" + id);
+
+            cbpt.change(onloadbef);
+
+            $("#clear" + id).click(function () {
+                api78({
+                    url: dgv.settings.url,
+                    m: 'clear', pars: [], apipt: cbpt.val(),
+                    back: function (data) {
+
+                        data = "操作成功";
+
+                        alert78(data);
+                        dgv.loadrows();
+                    }
+                });
+            })
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div id="waitload">
+        <!-- header -->
+        <header id="header" class="app-header navbar" role="menu">
+            <!-- navbar header -->
+            <div class="navbar-header bg-dark">
+                <button class="pull-right visible-xs dk" ui-toggle-class="show" target=".navbar-collapse">
+                    <i class="glyphicon glyphicon-cog"></i>
+                </button>
+                <button class="pull-right visible-xs" ui-toggle-class="off-screen" target=".app-aside" ui-scroll="app">
+                    <i class="glyphicon glyphicon-align-justify"></i>
+                </button>
+                <!-- brand -->
+                <a href="#" class="navbar-brand text-lt">
+                    <i class="fa fa-btc"></i>
+                    <img src="http://down.7788soft.com/static/img/logo.png" alt="." class="hide">
+                    <span class="hidden-folded m-l-xs">7788SAAS平台</span>
+                </a>
+                <!-- / brand -->
+            </div>
+            <!-- / navbar header -->
+            <!-- navbar collapse -->
+            <div class="collapse pos-rlt navbar-collapse box-shadow bg-white-only">
+                <!-- buttons -->
+                <div class="nav navbar-nav hidden-xs">
+                    <a href="#" class="btn no-shadow navbar-btn" ui-toggle-class="app-aside-folded" target=".app">
+                        <i class="fa fa-dedent fa-fw text"></i>
+                        <i class="fa fa-indent fa-fw text-active"></i>
+                    </a>
+                </div>
+                <!-- / buttons -->
+                <!-- nabar right -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle clear" data-toggle="dropdown">
+                            <span class="hidden-sm hidden-md"><strong id="righttop">guest:guest</strong> </span> <b class="caret"></b>
+                        </a>
+                        <!-- dropdown -->
+                        <ul class="dropdown-menu animated fadeInRight w">
+                            <!--<li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
+                                <div>
+                                    <p>服务到期日：2017-10-31</p>
+                                </div>
+                                <div class="progress progress-xs m-b-none dker">
+                                    <div class="progress-bar progress-bar-info" data-toggle="tooltip" data-original-title="50%" style="width: 50%"></div>
+                                </div>
+                            </li>-->
+                            <li>
+                                <a href="/html17/login.html">用户登录</a>
+                            </li>
+                            <li>
+                                <a href="/html17/myaccount.html">个人资料</a>
+                            </li>
+                            <li>
+                                <a href="#" id="logout">用户注销</a>
+                            </li>
+                        </ul>
+                        <!-- / dropdown -->
+                    </li>
+                </ul>
+                <!-- / navbar right -->
+            </div>
+            <!-- / navbar collapse -->
+        </header>
+        <!-- / header -->
+        <!-- aside -->
+        <aside id="aside" class="app-aside hidden-xs bg-dark">
+            <div class="aside-wrap">
+                <div class="navi-wrap" style="height:1100px">
+                    <!-- nav -->
+                    <nav ui-nav class="navi clearfix">
+                        <ul class="nav">
+                            <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+                                <span>导航</span>
+                            </li>
+                            <li>
+                                <a href="/menu/assure/index.html" class="auto">
+                                    <span class="pull-right text-muted">
+                                        <i class="fa fa-fw fa-angle-right text"></i>
+                                        <i class="fa fa-fw fa-angle-down text-active"></i>
+                                    </span>
+                                    <i class="fa fa-home"></i>
+                                    <span class="font-bold">切换系统</span>
+                                </a>
+                                <ul class="nav nav-sub dk">
+                                    <li>
+                                        <a href="/html17/future.html">
+                                            <span>期货交易系统</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/html17/stock.html">
+                                            <span>股票交易系统</span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="/html17/advise.html" class="auto">
+                                    <i class="fa fa-envelope"></i>
+                                    <span class="font-bold">意见建议</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/html17/company.html" class="auto">
+                                    <i class="fa fa-copyright"></i>
+                                    <span class="font-bold">帐套管理</span>
+                                </a>
+                            </li>
+                            <li class="line dk"></li>
+                            <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+                                <span>业务处理</span>
+                            </li>
+
+                            <li>
+                                <a href="#" class="auto">
+                                    <span class="pull-right text-muted">
+                                        <i class="fa fa-fw fa-angle-right text"></i>
+                                        <i class="fa fa-fw fa-angle-down text-active"></i>
+                                    </span>
+                                    <i class="fa fa-bar-chart-o"></i>
+                                    <span>统计监控</span>
+                                </a>
+                                <ul class="nav nav-sub dk">
+                                    <li>
+                                        <a href="/count_sql.html">
+                                            <span>sql统计</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/count_api.html">
+                                            <span>api统计</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/count_debug.html">
+                                            <span>调试记录统计</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/count_unit.html">
+                                            <span>监控测试</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/count_daily.html">
+                                            <span>日志查询</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                  
+                          
+                            <li class="line dk hidden-folded"></li>
+                        </ul>
+                    </nav>
+                    <!-- nav -->
+                    <!-- aside footer -->
+                    <div class="wrapper m-t">
+                        <div class="text-center-folded">
+                            <span class="hidden-folded"> 湘ICP备15 93号-2 </span>
+                        </div>
+                        <div class="text-center-folded">
+                            <span class="hidden-folded">湘公网安备4 6号</span>
+                        </div>
+                    </div>
+                    <!-- / aside footer -->
+                </div>
+            </div>
+        </aside>
+        <!-- / aside -->
+        <!-- content -->
+        <div id="content" class="app-content" role="main">
+            <div class="app-content-body">
+                <div class="wrapper-md">
+                    <div class="panel panel-default" id="page" style="height: 100%;">
+                        <!-- 说明组件 -->
+                        <div class="panel-heading" id="headtb_page">
+                            <div class="btn-group window_top">
+                                <button type="button" class="btn btn-info btn-sm dropdown-toggle pagedes" data-toggle="dropdown">
+                                    帮助<span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" id="destb_page"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /content -->
+            <!-- 右边浮动窗 -->
+            <!-- /右边浮动窗 -->
+            <!-- footer -->
+            <!--<footer id="footer" class="app-footer" role="footer">
+                <div class="wrapper b-t bg-light">
+                    <span class="pull-right">0.0.1 <a href ui-scroll="app" class="m-l-sm text-muted"><i class="fa fa-long-arrow-up"></i></a></span>
+                        © 2016 Copyright.
+                </div>
+            </footer>-->
+            <!-- / footer -->
+        </div>
+    </div>
+</body>
+</html>

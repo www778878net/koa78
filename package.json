@@ -41,7 +41,7 @@
   "devDependencies": {
     "@types/koa": "^2.13.5",
     "@types/koa-router": "^7.4.4",
-    "@types/node": "^18.11.4",
+    "@types/node": "^18.11.5",
     "chai": "^4.3.6",
     "cross-env": "^7.0.3",
     "fs": "^0.0.1-security",
@@ -52,7 +52,7 @@
     "typescript": "^4.8.4"
   },
   "dependencies": {
-    "@www778878net/koa78-base78": "^0.5.1",
+    "@www778878net/koa78-base78": "^0.6.0",
     "@www778878net/koa78-upinfo": "^0.0.105",
     "@www778878net/promise78": "^0.0.2",
     "@www778878net/redis78": "^0.1.1",

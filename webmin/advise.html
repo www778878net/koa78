@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta name="description" content="免费无任何功能及用户数限制的web版股票期货、自动交易、智能提醒、7788、免费管理软件 " />
+    <meta name="keywords" content="web版、股票期货、自动交易、股票历史行情、智能提醒、7788、免费管理软件" />
+    <title> 让工作更轻松</title>
+    <!--以下h+框架需要-->
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js">  </script>
+    <script>
+    !window.jQuery && document.write(unescape('%3Cscript src="/js/base/jquery-1.11.1.min.js"%3E%3C/script%3E'));
+    !window.jQuery && document.write(unescape('%3Cscript src="/js/base/jquery-ui-1.10.3.custom.min.js"%3E%3C/script%3E'));
+    </script>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="http://down.7788soft.com/static/css/hplus/animate.min.css" type="text/css" />
+    <link rel="stylesheet" href="/static/css/hplus/font-awesome.min93e3.css?v=4.4.0" type="text/css" />
+    <link rel="stylesheet" href="https://libs.baidu.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <!--以上h+框架需要-->
+    <link rel="stylesheet" href="/static/css/hplus/app.css" type="text/css" />
+    <link rel="stylesheet" href="/static/css/hplus/table.css" type="text/css" />
+    <script src="/js/dllbase/full78172.js?v=0.1"></script>
+    <script src="/js/dllbase/dgv78172.js?v=0.1"></script>
+</head>
+<body class="fixed-sidebar full-height-layout gray-bg  pace-done" style="overflow:hidden">
+    <div class="app app-header-fixed " id="main78"></div>
+
+    <script src="http://libs.baidu.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script>
+$(function () {
+config78.init({ system: localStorage.getItem("systemnow") }, cb);
+var dgv = new dgv78();
+var id = "tb_page";
+
+function cb() { 
+    dgv.init({
+        url: "api7817/ucenter/lovers_advise"
+        , cache: "sid", title: "意见建议"
+        , des: [".有任何意见建议欢迎提出 直达管理邮箱 2个工作日内回复"
+            , ".可投票 优先处理赞同人数多的"]
+        , cols: [{ name: "kind", head: '类别' },
+        { name: "advise", head: '意见建议' }, { name: "reply", head: '客服回复' }
+            , { name: "agree", head: '赞成' }, { name: "disagree", head: '反对' }
+        ], showdefmenu: false, oninihtml: oninihtml
+        , tbtop: '<div class="input-group"><span class="input-group-addon">意见建议:</span>'
+        + "<input type='text' class='form-control' id='tbTxt" +id + "' />"
+        + '<span class="input-group-btn"><button  class="btn btn-primary" id="btnDo'
+        + id + '">提交意见</button></span></div>'
+        , rowtop: '<a href="#" class="btnAgree">赞成</a>'
+        + '&nbsp;&nbsp;<a href="#" class="btnDis">反对</a>'
+    });
+}
+    function  oninihtml() {
+            var tb = $('#' + id);
+
+            tb.click(function (event) {
+                var even = $(event.target);
+                var row = even.parents("tr");
+                var idrow = row.attr("id");
+
+                if (even.hasClass("btnAgree")) {
+                    Agree(["agree"], idrow)
+                }
+
+                if (even.hasClass("btnDis")) {
+                    Agree(["disagree"], idrow)
+                }
+            });
+
+            $("#btnDo" + id).click(function () {
+                var tbtxtval = $("#tbTxt" + id).val();
+                if (tbtxtval === "") {
+                    alert78("内容不能为空");
+                    return;
+                }
+
+                api78({
+                    url: dgv.settings.url,
+                    m: 'add', pars: [config78.setting.system, tbtxtval],
+                    back: function (data) {
+                        if (data.length === 36)
+                            data = "操作成功!";
+                        dgv.loadrows();
+                        alert78(data);
+                    }
+                });
+            });
+        }
+
+    function Agree(pars, idrow) {
+
+            api78({
+                url: dgv.settings.url,
+                m: 'mAgree', mid: idrow, pars: pars,
+                back: function (data) {
+                    if (data.length == "36") {
+                        data = "操作成功";
+                    }
+                    alert78(data);
+                    dgv.loadrows();
+                }
+            });
+        }
+ 
+})
+    </script>
+</body>
+</html>

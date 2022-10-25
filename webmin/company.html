@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta name="description" content="免费无任何功能及用户数限制的web版股票期货、自动交易、智能提醒、7788、免费管理软件 " />
+    <meta name="keywords" content="web版、股票期货、自动交易、股票历史行情、智能提醒、7788、免费管理软件" />
+    <title> 让工作更轻松</title>
+    <!--以下h+框架需要-->
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js">  </script>
+    <script>
+    !window.jQuery && document.write(unescape('%3Cscript src="/js/base/jquery-1.11.1.min.js"%3E%3C/script%3E'));
+    !window.jQuery && document.write(unescape('%3Cscript src="/js/base/jquery-ui-1.10.3.custom.min.js"%3E%3C/script%3E'));
+    </script>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="http://down.7788soft.com/static/css/hplus/animate.min.css" type="text/css" />
+    <link rel="stylesheet" href="/static/css/hplus/font-awesome.min93e3.css?v=4.4.0" type="text/css" />
+    <link rel="stylesheet" href="https://libs.baidu.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <!--以上h+框架需要-->
+    <link rel="stylesheet" href="/static/css/hplus/app.css" type="text/css" />
+    <link rel="stylesheet" href="/static/css/hplus/table.css" type="text/css" />
+    <script src="/js/dllbase/full78172.js?v=0.1"></script>
+    <script src="/js/dllbase/dgv78172.js?v=0.1"></script>
+</head>
+<body class="fixed-sidebar full-height-layout gray-bg  pace-done" style="overflow:hidden">
+    <div class="app app-header-fixed " id="main78"></div>
+
+    <script src="http://libs.baidu.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script>
+$(function () {
+config78.init({ system: localStorage.getItem("systemnow") }, cb);
+var dgv = new dgv78();
+var id = "tb_page";
+
+    function cb() {
+        dgv.init({
+            pg:"page", url: "api7819/ucenter/companys"
+            , cache: "sid", title: "公司帐套"
+            , des: ['.本系统支持多用户多帐套 方便分厂分校等分机构管理', '.本系统支持多用户同时操作 方便分工管理'
+                , '.初次使用默认进入的是测试帐套 请增加您自己的帐套 建议为公司或机构名称', '.添加好后单击某行 设为默认 按钮,就可操作该帐套资料'
+                , '.操作多帐套仅需在此页面切换默认帐套即可']
+            , cols: [{ name: "coname", head: '帐套', v: { must: true } }
+                , { name: "upby", head: '创建人', mode: "" }
+                , { name: "uid", head: '创建人ID', mode: "" }
+            ], oninihtml: oninihtml, onmodify: onmodify, onsaved: onsaved
+            , divtop: '<button type="button" id="btnUsers' + id + '" class="btn btn-sm btn-primary" >帐套成员</button>'
+            //    ,tbtop: "意见建议:<input type='text' style='width:280px' id='tbTxt" + 
+            //id + "' />" 
+            //+ '<br/><button  class="btn btn-primary" id="btnDo' + id + '">提交意见</button>'
+            , rowtop: '&nbsp;&nbsp;<a href="#" class="btnDefault">设为默认</a>'
+            //+ '&nbsp;&nbsp;<a href="#" class="btnDis">反对</a>'
+        });
+    }
+
+    function oninihtml() {
+        var tb = $('#' + id);
+
+        tb.click(function (event) {
+            var even = $(event.target);
+
+            if (even.hasClass("btnDefault")) {
+                var row = even.parents("tr");
+                var idrow = row.attr("id");
+
+                api78({
+                    url: "api7819/ucenter/companys"
+                    , m: 'mSetdef'
+                    , mid: idrow
+                    , pars: row.children("td:eq(1)").text()
+                    , back: function (data) {
+
+                        if (data.length === 36) {
+                            localStorage.setItem("cid", data);
+                            localStorage.setItem("coname", row.children("td:eq(1)").text());
+                            config78.setRightTop();
+                            alert78("切换帐套成功!");
+
+
+                        }
+                        else
+                            alert78(data);
+                    }
+                });
+            }
+
+        });
+
+        $("#btnUsers" + id).click(function () {
+            api78({
+                url: "api7817/ucenter/companys"
+                , m: 'getCeoid'
+                , pars: localStorage.getItem("cid")
+                , back: function (data) {
+                    var canmodify = "0";
+                    if (data == localStorage.getItem("sid")) {
+                        canmodify = "1";
+                    }
+                    //localStorage.setItem("isceo", canmodify);
+
+                    //dgv.nextdgv("companyuser");
+                    //location.href="/html17/companyuser.html";
+                    window.open("/companyuser.html?isceo=" + canmodify)
+                }
+            })
+
+        })
+    }
+
+    function onsaved(idrow) {
+        var row = $("#" + idrow);
+        localStorage.setItem("cid", row.attr("id"));
+        localStorage.setItem("coname", row.children("td:eq(1)").text());
+        location.href = "/" + config78.setting.system + ".html";
+    }
+
+    function onmodify(row) {
+        var uname = localStorage.getItem("uname");
+        var td = row.children("td:eq(2)");
+        if (td.text() == "")
+            td.text(uname);
+        if (td.text() != uname) {
+            alert78("只有创建人能操作帐套基本资料！");
+            return false;
+        }
+        return true;
+    }
+})
+</script>
+</body>
+</html>
