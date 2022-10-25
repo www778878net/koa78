@@ -87,7 +87,7 @@ config78.init({ system: localStorage.getItem("systemnow") }, cb);
     //载入 登录二维码 启动登录线程
         function loadloginpic() {
             //api78({
-            //    url: "api7819/ucenter/lovers_weixin2card", m: "getTicketTmp"
+            //    url: "Api7822/ucenter/lovers_weixin2card", m: "getTicketTmp"
             //    , pars: ["login", ""]
             //    , back: function (data) {
             //       //console.log(data)
@@ -124,7 +124,7 @@ config78.init({ system: localStorage.getItem("systemnow") }, cb);
  
 
                 api78({
-                    url: "api7822/ucenter/lovers", m: "reg"
+                    url: "Api7822/ucenter/lovers", m: "reg"
                     , pars: [regu.val(), pwd, qq.val(), mobile.val(), "", truename.val()
                         , mobilevz.val()]
                     , back: function (data) {
@@ -156,7 +156,7 @@ config78.init({ system: localStorage.getItem("systemnow") }, cb);
                     return;
                 }
                 api78({
-                    url: "api7822/ucenter/lovers", m: "getMobileVzReg"
+                    url: "Api7822/ucenter/lovers", m: "getMobileVzReg"
                     , pars: [mobile.val()]
                     , back: function (data) {
 
@@ -184,7 +184,7 @@ config78.init({ system: localStorage.getItem("systemnow") }, cb);
                     localStorage.removeItem("cbSave");
                 }
                 api78({
-                    url: "api7822/ucenter/lovers", m: "login"
+                    url: "Api7822/ucenter/lovers", m: "login"
                     , pars: [uname, pwd, saveme]
                     , back: function (data) {
                         if (data["sid_web"].length == 36) {
@@ -215,7 +215,7 @@ config78.init({ system: localStorage.getItem("systemnow") }, cb);
         function loginscan() {
             //扫码登录
             //api78({
-            //    url: "api7819/ucenter/lovers", m: "loginWeixinScan17"
+            //    url: "Api7822/ucenter/lovers", m: "loginWeixinScan17"
             //    , pars: [loginscanid]
             //    , back: function (data) {
             //       //console.log(data)

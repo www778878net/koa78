@@ -16,7 +16,7 @@
     !window.jQuery && document.write(unescape('%3Cscript src="/js/base/jquery-ui-1.10.3.custom.min.js"%3E%3C/script%3E'));
     </script>
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="http://down.7788soft.com/static/css/hplus/animate.min.css" type="text/css" />
+    <link rel="stylesheet" href="/static/css/hplus/animate.min.css" type="text/css" />
     <link rel="stylesheet" href="/static/css/hplus/font-awesome.min93e3.css?v=4.4.0" type="text/css" />
     <link rel="stylesheet" href="https://libs.baidu.com/bootstrap/3.3.0/css/bootstrap.min.css">
     <!--以上h+框架需要-->
@@ -37,7 +37,7 @@ var id = "tb_page";
 
     function cb() {
         dgv.init({
-            pg:"page", url: "api7819/ucenter/companys"
+            pg:"page", url: "Api7822/ucenter/companys"
             , cache: "sid", title: "公司帐套"
             , des: ['.本系统支持多用户多帐套 方便分厂分校等分机构管理', '.本系统支持多用户同时操作 方便分工管理'
                 , '.初次使用默认进入的是测试帐套 请增加您自己的帐套 建议为公司或机构名称', '.添加好后单击某行 设为默认 按钮,就可操作该帐套资料'
@@ -66,7 +66,7 @@ var id = "tb_page";
                 var idrow = row.attr("id");
 
                 api78({
-                    url: "api7819/ucenter/companys"
+                    url: "Api7822/ucenter/companys"
                     , m: 'mSetdef'
                     , mid: idrow
                     , pars: row.children("td:eq(1)").text()
@@ -90,7 +90,7 @@ var id = "tb_page";
 
         $("#btnUsers" + id).click(function () {
             api78({
-                url: "api7817/ucenter/companys"
+                url: "Api7822/ucenter/companys"
                 , m: 'getCeoid'
                 , pars: localStorage.getItem("cid")
                 , back: function (data) {
@@ -113,7 +113,7 @@ var id = "tb_page";
         var row = $("#" + idrow);
         localStorage.setItem("cid", row.attr("id"));
         localStorage.setItem("coname", row.children("td:eq(1)").text());
-        location.href = "/" + config78.setting.system + ".html";
+        location.href = "/count_api.html";
     }
 
     function onmodify(row) {
