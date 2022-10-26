@@ -19,6 +19,10 @@ class testtb extends koa78_base78_1.Base78 {
         this.up.debug = true;
         return this._m();
     }
+    get() {
+        this.up.debug = true;
+        return this._get();
+    }
 }
 exports.default = testtb;
 //# sourceMappingURL=testtb.js.map

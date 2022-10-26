@@ -34,10 +34,7 @@ export default class sys_sql extends Base78  {
                 reject(e);
                 return;
             }
-            if (up.uname != "sysmessage") {
-                reject("err:只有管理员可以操作");
-                return;
-            }
+           
             let sb = "truncate table sys_sql  ";
             let back = await self.mysql.doGet(sb, [], up);
             resolve(back);
@@ -57,18 +54,17 @@ export default class sys_sql extends Base78  {
                 reject(e);
                 return;
             }
-            //if (up.uname != "sysmessage"
-            //    || up.uname != "chenlina") {
+            //if (   ) {
             //    reject("err:只有管理员可以操作");
             //    return;
             //}
-            let power = await self._vidateforuid(self.tbname + "_get");
-            //await self._addWarn(JSON.stringify(power), "sys_sql", "services", "services_dinpay");
-            if (power["code"] != 200) {
+            //let power = await self._vidateforuid(self.tbname + "_get");
+            ////await self._addWarn(JSON.stringify(power), "sys_sql", "services", "services_dinpay");
+            //if (power["code"] != 200) {
                 
-                resolve(power["errmsg"]);
-                return;
-            }
+            //    resolve(power["errmsg"]);
+            //    return;
+            //}
             let sb = "SELECT * FROM sys_sql order by dlong desc limit 0,100 ";
             let back = await self.mysql.doGet(sb, [], up);
             resolve(back);

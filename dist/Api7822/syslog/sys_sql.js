@@ -44,10 +44,6 @@ class sys_sql extends koa78_base78_1.Base78 {
                 reject(e);
                 return;
             }
-            if (up.uname != "sysmessage") {
-                reject("err:只有管理员可以操作");
-                return;
-            }
             let sb = "truncate table sys_sql  ";
             let back = yield self.mysql.doGet(sb, [], up);
             resolve(back);
@@ -67,17 +63,16 @@ class sys_sql extends koa78_base78_1.Base78 {
                 reject(e);
                 return;
             }
-            //if (up.uname != "sysmessage"
-            //    || up.uname != "chenlina") {
+            //if (   ) {
             //    reject("err:只有管理员可以操作");
             //    return;
             //}
-            let power = yield self._vidateforuid(self.tbname + "_get");
-            //await self._addWarn(JSON.stringify(power), "sys_sql", "services", "services_dinpay");
-            if (power["code"] != 200) {
-                resolve(power["errmsg"]);
-                return;
-            }
+            //let power = await self._vidateforuid(self.tbname + "_get");
+            ////await self._addWarn(JSON.stringify(power), "sys_sql", "services", "services_dinpay");
+            //if (power["code"] != 200) {
+            //    resolve(power["errmsg"]);
+            //    return;
+            //}
             let sb = "SELECT * FROM sys_sql order by dlong desc limit 0,100 ";
             let back = yield self.mysql.doGet(sb, [], up);
             resolve(back);

@@ -60,7 +60,7 @@ config78.init({ system: localStorage.getItem("systemnow") }, cb);
     headtb_page.after("<div class='table-responsive' id='div_tb" + id + "'></div>");
     var div = $("#div_tb" + id);
 
-    div.load('/html17/basic/loginbase.html #waitload', function () {          
+    div.load('/loginbase.html #waitload', function () {          
         //div.html($("#waitload").html());
         u = $("#u");
         p = $("#p");
@@ -187,6 +187,7 @@ config78.init({ system: localStorage.getItem("systemnow") }, cb);
                     url: "Api7822/ucenter/lovers", m: "login"
                     , pars: [uname, pwd, saveme]
                     , back: function (data) {
+                        data=data["back"]
                         if (data["sid_web"].length == 36) {
                             if (uname != "guest") loginwaitmax = 1;
                             localStorage.setItem("uname", uname);

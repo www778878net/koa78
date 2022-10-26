@@ -20,4 +20,9 @@ export default class testtb extends Base78 {
         this.up.debug = true;
         return this._m();
     }
+
+    get(): Promise<string> {
+        this.up.debug = true;
+        return this._get();
+    }
 }

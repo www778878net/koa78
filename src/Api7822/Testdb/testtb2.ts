@@ -2,12 +2,12 @@
 /**
  * 参数表 （测试用）
  * */
-export default class testtb3 extends Base78 {
+export default class testtb2 extends Base78 {
     constructor(ctx: any) {
 
         super(ctx);
         //this.uidcid = "uid";//默认是cid
-        this.tbname = "testtb3";
+        this.tbname = "testtb2";
 
         this.colsImp = [
             //类别   项目   设置值

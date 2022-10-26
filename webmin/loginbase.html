@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div id="waitload">
+        <div class="nav-tabs-alt">
+            <!--<ul class="nav nav-pills" role="tablist">
+                <li class="active">
+                    <a data-target="#tab-wx" role="tab" data-toggle="tab" aria-expanded="true"  >
+                        扫码登录
+                    </a>
+                </li>
+                <li class="">
+                    <a data-target="#tab-u" role="tab" data-toggle="tab" aria-expanded="false"  >
+                        密码登录
+                    </a>
+                </li>
+                <li class="">
+                    <a data-target="#tab-login" id="tabs-login" role="tab" data-toggle="tab" aria-expanded="false" >
+                        用户注册
+                    </a>
+
+                </li>
+            </ul>-->
+        </div>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane" id="tab-wx">
+
+                <div style="background:#fff; float:left;">
+                    <img width="175" height="175" id="loginimgwx" src="" />
+                    微信扫码即可免密登录
+
+                    <br>备注：登录注册完，可进系统我的系统设置绑定微信扫码登录</br>
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane active" id="tab-u">
+                <form  role="form">
+                    <div class="form-group">
+                        <label for="u" class="col-sm-3 control-label">用户名</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="u">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="p" class="col-sm-3 control-label"> 密  码</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" id="p">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <label>
+                                <input type="checkbox" id="cbSave">记住我(下次免登录)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <button type="button" class="btn btn-primary" id="btnLogin">登录</button>
+                            <!--<button type="button" class="btn btn-primary" id="btnfind" onclick="window.open('/menu/findpw.html')">找回密码</button>-->
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="tab-binding">
+                <form  role="form">
+                    <div class="form-group">
+                        <label for="u" class="col-sm-3 control-label">用户名</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="bindingu">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="p" class="col-sm-3 control-label"> 密  码</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" id="bindingp">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="u" class="col-sm-3 control-label">微信</label>
+                        <div class="col-sm-9">
+                            <img width="175" height="175" id="bindingwx" src="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <button type="button" class="btn btn-primary" id="btnbinding">绑定微信</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div role="tabpanel" class="tab-pane " id="tab-login">
+                <form  role="form">
+                    <div class="form-group">
+                        <label for="u" class="col-sm-3 control-label">用户名</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="regu">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="p" class="col-sm-3 control-label"> 密  码</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" id="regp">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="u" class="col-sm-3 control-label">QQ</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="qq">
+                                <span class="input-group-addon">@qq.com</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="u" class="col-sm-3 control-label">姓名</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="truename">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="u" class="col-sm-3 control-label">手机</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="mobile">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-info" type="button" id="btnMobilevz">验证码</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="u" class="col-sm-3 control-label">验证码</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="mobilevz">
+                        </div>
+                    </div>
+          
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <button type="button" class="btn btn-primary" id="btnReg">注册</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+
+        </div>
+    </div>
+</body>
+</html>

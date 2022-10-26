@@ -129,7 +129,7 @@ config.prototype.init = function (option, cb) {
 
     var main78 = $("#main78");
     localStorage.setItem("systemnow", self.setting.system);
-    main78.load("/html17/" + self.setting.system + "/main_left.html #waitload", function () {
+    main78.load("/main_left.html #waitload", function () {
         //main78.prepend($("#waitload").html());
 
        
@@ -385,7 +385,7 @@ function api78(option) {
         mid: '',// guidnew78(),
         bcid: 'd4856531-e9d3-20f3-4c22-fe3c65fb009c',// 
         cid: '',
-        cols: ['all'],//返回哪些列['all']
+        //cols: ['all'],//返回哪些列['all']
 
         back: function (data) {
         },
@@ -394,7 +394,7 @@ function api78(option) {
         getstart: 0,//从哪行开始
         order: "idpk",//排序字段
         jsonp: 0,//jsonp
-        v:17,
+        v:18,
         uname: '',//用于报错
 
         apipt:null,//可指定调用ALI还是QQ 默认就自动
@@ -447,7 +447,7 @@ function api78(option) {
         //uname: localStorage.getItem("uname")
         //,sid: settings.sid   
         pars: pars//下版没有也应该可以不传
-        , cols: cols//下版默认应该可以不传
+        //, cols: cols//下版默认应该可以不传
         , jsonbase64: 1//下版默认为1
         //, bcid: settings.bcid
         //, cid: settings.cid
