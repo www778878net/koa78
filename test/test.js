@@ -1,4 +1,5 @@
 ﻿'use strict';
+console.log("test")
 const expect = require('chai').expect;
 const UpInfo = require('@www778878net/koa78-upinfo').default;
 const restler = require('restler');
@@ -65,6 +66,26 @@ describe("no power api test", () => {
         expect(err).to.be.null;
 
         expect(res["back"]).to.equal("8");
+    });
+
+    it('TestMenu/Test78/testmem', async () => {
+        function test() {
+            return new Promise78((resolve, reject) => {
+                restler.get("http://localhost:88/Api7822/TestMenu/Test78/testmem", { data: { pars: ["test"] } })
+                    .on('complete', function (back) {
+                        resolve(back)
+                    });
+            })
+        }
+        let [err, res] = await test();
+        console.log(err)
+        console.log(res)
+        res = JSON.parse(res)
+
+        console.log(res["back"])
+        expect(err).to.be.null;
+
+        expect(res["back"]).to.equal("9");
     });
 });
 

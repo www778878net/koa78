@@ -1,4 +1,4 @@
-﻿import { Base78 } from "@www778878net/koa78-Base78";
+﻿import { Base78 } from "@www778878net/koa78-base78";
 /**
  *后台统计SQL效率
  */

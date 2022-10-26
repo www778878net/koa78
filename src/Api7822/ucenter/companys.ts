@@ -1,4 +1,4 @@
-﻿import { Base78 } from "@www778878net/koa78-Base78";
+﻿import { Base78 } from "@www778878net/koa78-base78";
 /**
  *公司
  */

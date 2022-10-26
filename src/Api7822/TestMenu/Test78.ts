@@ -11,6 +11,18 @@ export default class Test78 extends Base78 {
         this.cols = this.colsImp.concat(this.colsremark);
     }
 
+    testmem(): Promise<string> {
+        const self = this;
+        const up = self.up;
+
+        return new Promise(async (resolve, reject) => {
+            let setback = await self.memcache.set("testmem", 9, 60);
+            let getback = await self.memcache.get("testmem")
+            resolve(getback);
+            return;
+        })
+    }
+
     testredis(): Promise<string> {
         const self = this;
         const up = self.up;

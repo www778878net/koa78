@@ -9,11 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const koa78_Base78_1 = require("@www778878net/koa78-Base78");
+const koa78_base78_1 = require("@www778878net/koa78-base78");
 /**
  *后台统计SQL效率
  */
-class sys_nodejs extends koa78_Base78_1.Base78 {
+class sys_nodejs extends koa78_base78_1.Base78 {
     //常量
     constructor(ctx) {
         super(ctx);

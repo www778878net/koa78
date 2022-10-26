@@ -19,6 +19,16 @@ class Test78 extends koa78_base78_1.Base78 {
         this.colsImp = [];
         this.cols = this.colsImp.concat(this.colsremark);
     }
+    testmem() {
+        const self = this;
+        const up = self.up;
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            let setback = yield self.memcache.set("testmem", 9, 60);
+            let getback = yield self.memcache.get("testmem");
+            resolve(getback);
+            return;
+        }));
+    }
     testredis() {
         const self = this;
         const up = self.up;

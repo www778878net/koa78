@@ -26,8 +26,8 @@
   "scripts": {
     "upgrade78": "yarn-upgrade-all",
     "dev": "cross-env NODE_ENV=dev nodemon -e ts --exec ts-node src/index.ts",
-    "start": " node .\\dist\\index.js  --config config.json",
-    "startpm": " pm2 start .\\dist\\index.js  -- config config.json",
+    "start": " node ./dist/index.js  --config config.json",
+    "startpm": " pm2 start ./dist/index.js  -- config config.json",
     "postpublish2": "git push origin --all && git push origin --tags",
     "postversion2": "npm publish --access public",
     "preversion": "npm test ",
