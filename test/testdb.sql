@@ -11,7 +11,7 @@
  Target Server Version : 80031
  File Encoding         : 65001
 
- Date: 19/10/2022 21:24:26
+ Date: 26/10/2022 16:55:49
 */
 
 SET NAMES utf8mb4;
@@ -37,12 +37,13 @@ CREATE TABLE `companys`  (
   PRIMARY KEY (`idpk`) USING BTREE,
   UNIQUE INDEX `ix_Company_name`(`coname`) USING BTREE,
   UNIQUE INDEX `ix_Company`(`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of companys
 -- ----------------------------
-INSERT INTO `companys` VALUES ('CD86605E-7A42-481A-9786-85010E67128A', '测试帐套', 'sysmessage', '2022-10-18 23:38:53', 1, 'GUEST000-8888-8888-8888-GUEST00GUEST', 'GUEST000-8888-8888-8888-GUEST00GUEST', '', '', '', '', '');
+INSERT INTO `companys` VALUES ('CD86605E-7A42-481A-9786-85010E67128A', '测试帐套', 'sysadmin', '2022-10-20 22:05:17', 1, 'GUEST000-8888-8888-8888-GUEST00GUEST', 'GUEST000-8888-8888-8888-GUEST00GUEST', '', '', '', '', '');
+INSERT INTO `companys` VALUES ('CD86605E-7A42-481A-9786-85010E67128A', 'net78', 'sysadmin', '2022-10-20 22:05:10', 2, 'd4856531-e9d3-20f3-4c22-fe3c65fb009c', '', NULL, '', '', '', '');
 
 -- ----------------------------
 -- Table structure for companysuser
@@ -65,13 +66,14 @@ CREATE TABLE `companysuser`  (
   PRIMARY KEY (`idpk`) USING BTREE,
   UNIQUE INDEX `ix_CompanysUser`(`id`) USING BTREE,
   INDEX `ix_companyuser_ciduid`(`cid`, `uid`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of companysuser
 -- ----------------------------
 INSERT INTO `companysuser` VALUES ('GUEST000-8888-8888-8888-GUEST00GUEST', 'GUEST888-8888-8888-8888-GUEST88GUEST', 'guest', '2015-02-18 14:53:49', 1, 'db0aee26-0378-dadf-c876-ebbcae201bda', NULL, NULL, NULL, NULL, NULL, NULL, '');
 INSERT INTO `companysuser` VALUES ('GUEST000-8888-8888-8888-GUEST00GUEST', 'CD86605E-7A42-481A-9786-85010E67128A', 'guest', '2015-02-18 14:53:49', 2, 'CD86605E-7A42-481A-9786-85010E67128A', NULL, NULL, NULL, NULL, NULL, NULL, '');
+INSERT INTO `companysuser` VALUES ('d4856531-e9d3-20f3-4c22-fe3c65fb009c', 'CD86605E-7A42-481A-9786-85010E67128A', 'guest', '2015-02-18 14:53:49', 3, 'd4856531-e9d3-20f3-4c22-fe3c65fb009c', NULL, NULL, NULL, NULL, NULL, NULL, '');
 
 -- ----------------------------
 -- Table structure for lovers
@@ -98,13 +100,75 @@ CREATE TABLE `lovers`  (
   PRIMARY KEY (`idpk`) USING BTREE,
   UNIQUE INDEX `ix_Lover`(`id`) USING BTREE,
   UNIQUE INDEX `ix_lover_uname`(`uname`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of lovers
 -- ----------------------------
 INSERT INTO `lovers` VALUES ('guest', 'e10adc3949ba59abbe56e057f20f883e', 'GUEST888-8888-8888-8888-GUEST88GUEST', '8573faf2-24b2-b586-adac-d9d8da9772d0', '2018-06-01 18:02:43', 'GUEST000-8888-8888-8888-GUEST00GUEST', '', '1900-01-01 00:00:00', 1, 'GUEST888-8888-8888-8888-GUEST88GUEST', '', '', '', '', '', '', '');
-INSERT INTO `lovers` VALUES ('admin', 'e10adc3949ba59abbe56e057f20f883e', '9776b64d-70b2-9d61-4b24-60325ea1345e', 'a46f3ec9-b40d-6850-838e-6b897a73c72f', '2022-10-24 22:06:26', 'd4856531-e9d3-20f3-4c22-fe3c65fb009c', '', '1900-01-01 00:00:00', 2, 'CD86605E-7A42-481A-9786-85010E67128A', '', '', '', '', '', '', '');
+INSERT INTO `lovers` VALUES ('sysadmin', 'e10adc3949ba59abbe56e057f20f883e', '9776b64d-70b2-9d61-4b24-60325ea1345e', 'a46f3ec9-b40d-6850-838e-6b897a73c72f', '2022-10-24 22:06:26', 'd4856531-e9d3-20f3-4c22-fe3c65fb009c', '', '1900-01-01 00:00:00', 2, 'CD86605E-7A42-481A-9786-85010E67128A', '', '', '', '', '', '', '');
+
+-- ----------------------------
+-- Table structure for sys_ip
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_ip`;
+CREATE TABLE `sys_ip`  (
+  `cid` varchar(36) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `uid` varchar(36) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `ip` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `upby` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `uptime` datetime(0) NOT NULL,
+  `idpk` int(0) NOT NULL AUTO_INCREMENT,
+  `id` varchar(36) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `remark` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `remark2` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `remark3` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `remark4` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `remark5` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `remark6` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`idpk`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_ip
+-- ----------------------------
+INSERT INTO `sys_ip` VALUES ('', 'GUEST888-8888-8888-8888-GUEST88GUEST', '127.0.0.1', 'guest', '2022-10-20 22:06:34', 1, 'd4ef1164-95bc-7afa-37bc-08f761577d4d', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_ip` VALUES ('', 'GUEST888-8888-8888-8888-GUEST88GUEST', '127.0.0.1', 'guest', '2022-10-24 22:22:30', 2, '5caffab3-142e-dc80-8016-64cc96208429', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_ip` VALUES ('', 'GUEST888-8888-8888-8888-GUEST88GUEST', '127.0.0.1', 'guest', '2022-10-26 15:01:43', 3, 'fe3d85e6-70a5-37ca-fc1c-62cf6e6448f7', NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- ----------------------------
+-- Table structure for sys_nodejs
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_nodejs`;
+CREATE TABLE `sys_nodejs`  (
+  `cid` varchar(36) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `apiv` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `apisys` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `apiobj` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `method` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `num` int(0) NOT NULL DEFAULT 0,
+  `dlong` int(0) NOT NULL DEFAULT 0,
+  `uplen` int(0) NOT NULL DEFAULT 0,
+  `downlen` int(0) NOT NULL DEFAULT 0,
+  `upby` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `uptime` datetime(0) NOT NULL,
+  `idpk` int(0) NOT NULL AUTO_INCREMENT,
+  `id` varchar(36) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `remark` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `remark2` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `remark3` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `remark4` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `remark5` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `remark6` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`idpk`) USING BTREE,
+  UNIQUE INDEX `u_v_sys_obj_method`(`apiv`, `apisys`, `apiobj`, `method`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 196 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_nodejs
+-- ----------------------------
+INSERT INTO `sys_nodejs` VALUES ('', 'api7817', 'ucenter', 'lovers', '/Api7822/ucenter/lovers/login', 8, 203, 304, 1347, '', '2022-10-25 21:34:15', 133, '2b68c444-fee6-58db-41e5-c08e25563353', '', '', '', '', '', '');
+INSERT INTO `sys_nodejs` VALUES ('', 'api7817', 'TestMenu', 'Test78', '/Api7822/TestMenu/Test78/testmem', 3, 44, 0, 138, '', '2022-10-26 15:00:12', 199, '8c201e94-18e6-5ed5-bd9d-b74f47710c0a', '', '', '', '', '', '');
 
 -- ----------------------------
 -- Table structure for sys_sql
@@ -115,7 +179,7 @@ CREATE TABLE `sys_sql`  (
   `apiv` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
   `apisys` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
   `apiobj` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
-  `cmdtext` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `cmdtext` varchar(800) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `uname` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
   `num` int(0) NOT NULL DEFAULT 0,
   `dlong` int(0) NOT NULL DEFAULT 0,
@@ -133,7 +197,14 @@ CREATE TABLE `sys_sql`  (
   `remark6` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`idpk`) USING BTREE,
   UNIQUE INDEX `u_v_sys_obj_cmdtext`(`apiv`, `apisys`, `apiobj`, `cmdtext`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 306 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_sql
+-- ----------------------------
+INSERT INTO `sys_sql` VALUES ('', '17.2', 'ucenter', 'lovers', 'insert into sys_nodejs(apiv,apisys,apiobj, method,num,dlong,uplen,downlen,uptime,id)values(?,?,?,?,?,?,?,?,?,?)ON DUPLICATE KEY UPDATE num=num+1,dlong=dlong+?,uplen=uplen+?,downlen=downlen+?', '', 8, 39, 1032, '', '0998023bd7565d877cb04b6e707d4613', '2022-10-25 21:34:16', 203, '3a8cbed5-939a-e942-983e-c44ee5643eb8', '', '', '', '', '', '');
+INSERT INTO `sys_sql` VALUES ('', '17.2', 'ucenter', 'lovers', ' INSERT INTO  lovers  (cid, uname,pwd,sid,sid_web,sid_web_date,id,upby,uptime,idcodef) SELECT ?,?,?,?,?,?,?,?,?,?', '', 1, 8, 166, '', '175e6e9cb95c188b2df82925c65bf33c', '2022-10-25 21:39:05', 226, 'a96d300c-3cc7-e24c-21ce-038884d6c060', '', '', '', '', '', '');
+INSERT INTO `sys_sql` VALUES ('', '17.2', 'ucenter', 'lovers', 'UPDATE lovers SET sid_web=?,sid_web_date=?,uptime=? WHERE uname=?', '', 4, 47, 672, '', '4c6ab3975bb2ccd83f1e63447469ec96', '2022-10-25 21:40:26', 252, '57532d88-b506-4c36-4b35-2955d0bea242', '', '', '', '', '', '');
 
 -- ----------------------------
 -- Table structure for sys_warn
@@ -157,17 +228,14 @@ CREATE TABLE `sys_warn`  (
   `remark5` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
   `remark6` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`idpk`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 176 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_warn
 -- ----------------------------
-INSERT INTO `sys_warn` VALUES ('', 'debug_TestMenu', 'TestMenu', 'testtb', '[\n  RowDataPacket {\n    uname: \'guest\',\n    pwd: \'e10adc3949ba59abbe56e057f20f883e\',\n    id: \'GUEST888-8888-8888-8888-GUEST88GUEST\',\n    upby: \'\',\n    uptime: \'1900-01-01 00:00:00\',\n    sid_web_date: \'2018-06-01 18:02:43\',\n    idcoDef: \'GUEST000-8888-8888-8888-GUEST00GUEST\',\n    idpk: 1,\n    coname: \'测试帐套\',\n    idceo: \'CD86605E-7A42-481A-9786-85010E67128A\',\n    cid: \'GUEST000-8888-8888-8888-GUEST00GUEST\'\n  }\n] c:select t1.* ,companys.coname,companys.uid as idceo,companys.id as cid  from    (SELECT uname,pwd,id,upby,uptime,sid_web_date,    idcoDef,idpk   FROM lovers Where sid=? or sid_web=?)as t1 LEFT JOIN `companysuser` as t2 on t2.uid=t1.id and t2.cid=t1.idcodef left join companys    on t1.idcodef=companys.id vGUEST888-8888-8888-8888-GUEST88GUEST,GUEST888-8888-8888-8888-GUEST88GUEST', '80801fbd-481b-e3a5-db87-e98fb0ca6816', '��', '2022-10-19 21:23:13', 31, '601f759a-b186-4e2e-ddb9-92c6ec09c6ea', '', '', '', '', '', '');
-INSERT INTO `sys_warn` VALUES ('', 'debug_TestMenu', 'TestMenu', 'testtb', '[ RowDataPacket { id: \'9009408d-6430-f43b-2b56-c94a453b7f4d\' } ] c:SELECT id FROM testtb where id=?  v9009408d-6430-f43b-2b56-c94a453b7f4d', '80801fbd-481b-e3a5-db87-e98fb0ca6816', 'guest', '2022-10-19 21:23:13', 32, '69e4dd8b-27f1-a0e1-f312-1a8bc249bf79', '', '', '', '', '', '');
-INSERT INTO `sys_warn` VALUES ('', 'debug_TestMenu', 'TestMenu', 'testtb', '{\n  fieldCount: 0,\n  affectedRows: 0,\n  insertId: 0,\n  serverStatus: 2,\n  warningCount: 0,\n  message: \'(Rows matched: 0  Changed: 0  Warnings: 0\',\n  protocol41: true,\n  changedRows: 0\n} c:UPDATE  testtb SET kind=?,upby=?,uptime=? WHERE id=? and cid=? LIMIT 1 v5d95ee86-7136-ba70-1bef-d489e6f7ff93,guest,2022-10-19 21:23:13,9009408d-6430-f43b-2b56-c94a453b7f4d,GUEST000-8888-8888-8888-GUEST00GUEST', '80801fbd-481b-e3a5-db87-e98fb0ca6816', 'guest', '2022-10-19 21:23:13', 33, '1442bb44-3ca2-3529-ab58-15c66efd6c65', '', '', '', '', '', '');
-INSERT INTO `sys_warn` VALUES ('', 'debug_TestMenu', 'TestMenu', 'testtb', '[\n  RowDataPacket {\n    uname: \'guest\',\n    pwd: \'e10adc3949ba59abbe56e057f20f883e\',\n    id: \'GUEST888-8888-8888-8888-GUEST88GUEST\',\n    upby: \'\',\n    uptime: \'1900-01-01 00:00:00\',\n    sid_web_date: \'2018-06-01 18:02:43\',\n    idcoDef: \'GUEST000-8888-8888-8888-GUEST00GUEST\',\n    idpk: 1,\n    coname: \'测试帐套\',\n    idceo: \'CD86605E-7A42-481A-9786-85010E67128A\',\n    cid: \'GUEST000-8888-8888-8888-GUEST00GUEST\'\n  }\n] c:select t1.* ,companys.coname,companys.uid as idceo,companys.id as cid  from    (SELECT uname,pwd,id,upby,uptime,sid_web_date,    idcoDef,idpk   FROM lovers Where sid=? or sid_web=?)as t1 LEFT JOIN `companysuser` as t2 on t2.uid=t1.id and t2.cid=t1.idcodef left join companys    on t1.idcodef=companys.id vGUEST888-8888-8888-8888-GUEST88GUEST,GUEST888-8888-8888-8888-GUEST88GUEST', '388122ba-7434-15db-de13-553dd69e1ee3', '��', '2022-10-19 21:23:57', 34, '268b8d6e-42f3-4828-fe45-46b9d80c3a81', '', '', '', '', '', '');
-INSERT INTO `sys_warn` VALUES ('', 'debug_TestMenu', 'TestMenu', 'testtb', '[ RowDataPacket { id: \'9009408d-6430-f43b-2b56-c94a453b7f4d\' } ] c:SELECT id FROM testtb where id=?  v9009408d-6430-f43b-2b56-c94a453b7f4d', '388122ba-7434-15db-de13-553dd69e1ee3', 'guest', '2022-10-19 21:23:57', 35, 'd01b31fe-823d-ea07-c402-79792531faa9', '', '', '', '', '', '');
-INSERT INTO `sys_warn` VALUES ('', 'debug_TestMenu', 'TestMenu', 'testtb', '{\n  fieldCount: 0,\n  affectedRows: 1,\n  insertId: 0,\n  serverStatus: 2,\n  warningCount: 0,\n  message: \'(Rows matched: 1  Changed: 1  Warnings: 0\',\n  protocol41: true,\n  changedRows: 1\n} c:UPDATE  testtb SET kind=?,upby=?,uptime=? WHERE id=? and cid=? LIMIT 1 v9e883296-29bf-f07f-d542-2c8f52537bb0,guest,2022-10-19 21:23:57,9009408d-6430-f43b-2b56-c94a453b7f4d,GUEST000-8888-8888-8888-GUEST00GUEST', '388122ba-7434-15db-de13-553dd69e1ee3', 'guest', '2022-10-19 21:23:57', 36, '7d82aecd-4a46-ab93-52f5-829dac0ee503', '', '', '', '', '', '');
+INSERT INTO `sys_warn` VALUES ('', 'debug_TestMenu', 'TestMenu', 'testtb', '{\n  fieldCount: 0,\n  affectedRows: 1,\n  insertId: 3,\n  serverStatus: 2,\n  warningCount: 0,\n  message: \'\',\n  protocol41: true,\n  changedRows: 0\n} c:insert into sys_ip(uid,ip, upby,uptime,id)values(?,?,?,?,?) vGUEST888-8888-8888-8888-GUEST88GUEST,127.0.0.1,guest,2022-10-26 15:01:43,fe3d85e6-70a5-37ca-fc1c-62cf6e6448f7', '02c52868-5923-8de9-78cf-116f7cdc0925', 'guest', '2022-10-26 15:01:44', 178, '32d9ca06-4b3d-5524-7a68-f6ce49473227', '', '', '', '', '', '');
+INSERT INTO `sys_warn` VALUES ('', 'debug_TestMenu', 'TestMenu', 'testtb', '[ RowDataPacket { id: \'9009408d-6430-f43b-2b56-c94a453b7f4d\' } ] c:SELECT id FROM testtb where id=?  v9009408d-6430-f43b-2b56-c94a453b7f4d', '617a015e-c6df-e2f2-9858-21e060921c89', 'guest', '2022-10-26 16:34:41', 179, 'bf40e55e-3feb-b5db-070a-6047bc80f53b', '', '', '', '', '', '');
+INSERT INTO `sys_warn` VALUES ('', 'debug_TestMenu', 'TestMenu', 'testtb', '{\n  fieldCount: 0,\n  affectedRows: 1,\n  insertId: 0,\n  serverStatus: 2,\n  warningCount: 0,\n  message: \'(Rows matched: 1  Changed: 1  Warnings: 0\',\n  protocol41: true,\n  changedRows: 1\n} c:UPDATE  testtb SET kind=?,upby=?,uptime=? WHERE id=? and cid=? LIMIT 1 ve75f33be-5889-8381-26ae-d37bcf002d91,guest,2022-10-26 16:34:40,9009408d-6430-f43b-2b56-c94a453b7f4d,GUEST000-8888-8888-8888-GUEST00GUEST', '617a015e-c6df-e2f2-9858-21e060921c89', 'guest', '2022-10-26 16:34:41', 180, 'a7798e36-efa6-c772-0fbf-84acf19455f8', '', '', '', '', '', '');
 
 -- ----------------------------
 -- Table structure for testtb
@@ -192,12 +260,133 @@ CREATE TABLE `testtb`  (
   UNIQUE INDEX `ix_id`(`id`) USING BTREE,
   UNIQUE INDEX `u_kind_item`(`cid`, `kind`, `item`) USING BTREE,
   INDEX `i_kind_item`(`kind`, `item`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of testtb
 -- ----------------------------
-INSERT INTO `testtb` VALUES ('GUEST000-8888-8888-8888-GUEST00GUEST', '9e883296-29bf-f07f-d542-2c8f52537bb0', 'itemval', '939296c5-8cbb-65a9-ed84-df3e286fa3a1', 'guest', '2022-10-19 21:23:57', 1, '9009408d-6430-f43b-2b56-c94a453b7f4d', '', '', '', '', '', '');
-INSERT INTO `testtb` VALUES ('GUEST000-8888-8888-8888-GUEST00GUEST', 'kindval', 'aa86c9b6-686c-26f5-edbd-92369629f033', '653cf6d9-e7d1-f5f3-5544-491bfd26a4a9', 'guest', '2022-10-18 19:10:13', 2, 'id', '', '', '', '', '', '');
+INSERT INTO `testtb` VALUES ('GUEST000-8888-8888-8888-GUEST00GUEST', 'e75f33be-5889-8381-26ae-d37bcf002d91', 'itemval', '4ab4bb9f-e308-0131-8711-2c1338a32438', 'guest', '2022-10-26 16:34:40', 1, '9009408d-6430-f43b-2b56-c94a453b7f4d', '', '', '', '', '', '');
+INSERT INTO `testtb` VALUES ('GUEST000-8888-8888-8888-GUEST00GUEST', 'kindval', '7316ee3c-cc05-b210-a8f0-95d473a80d91', '653cf6d9-e7d1-f5f3-5544-491bfd26a4a9', 'guest', '2022-10-18 19:10:13', 2, 'id', '', '', '', '', '', '');
+INSERT INTO `testtb` VALUES ('cidval', 'kindval', 'itemval', 'dataval', 'guest', '2022-10-20 21:05:43', 11, '9d192fd2-5883-3ce8-0726-32dceb3ee312', '', '', '', '', '', '');
+
+-- ----------------------------
+-- Table structure for testtb2
+-- ----------------------------
+DROP TABLE IF EXISTS `testtb2`;
+CREATE TABLE `testtb2`  (
+  `cid` varchar(36) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `kind` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `item` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `data` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `d2` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `d3` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `d4` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `d5` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `d6` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `upby` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `uptime` datetime(0) NOT NULL,
+  `idpk` int(0) NOT NULL AUTO_INCREMENT,
+  `id` varchar(36) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `remark` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `remark2` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `remark3` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `remark4` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `remark5` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `remark6` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`idpk`) USING BTREE,
+  UNIQUE INDEX `ix_id`(`id`) USING BTREE,
+  UNIQUE INDEX `u_kind_item`(`cid`, `kind`, `item`) USING BTREE,
+  INDEX `i_kind_item`(`kind`, `item`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for testtb3
+-- ----------------------------
+DROP TABLE IF EXISTS `testtb3`;
+CREATE TABLE `testtb3`  (
+  `cid` varchar(36) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `kind` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `item` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `data` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `d2` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `d3` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `d4` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `d5` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `d6` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `upby` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `uptime` datetime(0) NOT NULL,
+  `idpk` int(0) NOT NULL AUTO_INCREMENT,
+  `id` varchar(36) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `remark` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `remark2` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `remark3` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `remark4` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `remark5` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `remark6` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`idpk`) USING BTREE,
+  UNIQUE INDEX `ix_id`(`id`) USING BTREE,
+  UNIQUE INDEX `u_kind_item`(`cid`, `kind`, `item`) USING BTREE,
+  INDEX `i_kind_item`(`kind`, `item`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for testtb4
+-- ----------------------------
+DROP TABLE IF EXISTS `testtb4`;
+CREATE TABLE `testtb4`  (
+  `cid` varchar(36) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `kind` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `item` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `data` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `d2` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `d3` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `d4` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `d5` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `d6` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `upby` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `uptime` datetime(0) NOT NULL,
+  `idpk` int(0) NOT NULL AUTO_INCREMENT,
+  `id` varchar(36) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `remark` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `remark2` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `remark3` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `remark4` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `remark5` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `remark6` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`idpk`) USING BTREE,
+  UNIQUE INDEX `ix_id`(`id`) USING BTREE,
+  UNIQUE INDEX `u_kind_item`(`cid`, `kind`, `item`) USING BTREE,
+  INDEX `i_kind_item`(`kind`, `item`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for testtb5
+-- ----------------------------
+DROP TABLE IF EXISTS `testtb5`;
+CREATE TABLE `testtb5`  (
+  `cid` varchar(36) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `kind` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `item` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `data` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `d2` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `d3` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `d4` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `d5` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `d6` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `upby` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `uptime` datetime(0) NOT NULL,
+  `idpk` int(0) NOT NULL AUTO_INCREMENT,
+  `id` varchar(36) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `remark` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `remark2` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `remark3` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `remark4` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `remark5` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `remark6` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`idpk`) USING BTREE,
+  UNIQUE INDEX `ix_id`(`id`) USING BTREE,
+  UNIQUE INDEX `u_kind_item`(`cid`, `kind`, `item`) USING BTREE,
+  INDEX `i_kind_item`(`kind`, `item`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;
