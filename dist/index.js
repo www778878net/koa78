@@ -8,6 +8,12 @@ var iconv = require('iconv-lite');
 var fs = require('fs');
 //console.log(process.argv)
 var fspath = process.argv[3];
+for (var i = 0; i < process.argv.length; i++) {
+    if (process.argv[i] == "config") {
+        fspath = process.argv[i + 1];
+        break;
+    }
+}
 var Config78 = loadjson(fspath);
 function loadjson(filepath) {
     var data;

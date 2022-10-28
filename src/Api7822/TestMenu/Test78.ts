@@ -51,7 +51,8 @@ export default class Test78 extends Base78 {
         console.log("test in getConfig78" + up.uname);
   
         return new Promise(async (resolve, reject) => {
-            resolve({ Argv: self.Argv, Config: self.Config });
+            resolve("不能公开config测试的时候用用")
+            //resolve({ Argv: self.Argv, Config: self.Config });
             return;
         })
     }
