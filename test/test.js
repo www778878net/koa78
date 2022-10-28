@@ -24,8 +24,9 @@ describe("no power api test", () => {
         res = JSON.parse(res)
         console.log(res["back"])
         expect(err).to.be.null;
-
-        expect(res["back"]["Config"]["location"]).to.equal("ali");
+        //
+        expect(res["back"]).to.equal("不能公开config测试的时候用用");
+        //expect(res["back"]["Config"]["location"]).to.equal("ali");
     });
 
     it('TestMenu/Test78/test ', async () => {
