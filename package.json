@@ -1,6 +1,6 @@
 {
   "name": "@www778878net/koa78",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "nodejs koa78封装",
   "main": "dist/index.js",
   "types": "src/index.ts",
@@ -29,7 +29,9 @@
     "patch78": "npm version patch ",
     "minor78": "npm version minor ",
     "dev": "cross-env NODE_ENV=dev nodemon -e ts --exec ts-node src/index.ts",
+    "restart": "cd /koa78 ; git pull -p  ;pm2 reload koa78;",
     "start": " node ./dist/index.js  -- config config.json",
+    "startali": "cd /koa78 ; git pull -p  ; node ./dist/index.js  -- config configali.json",
     "startpm": " pm2 start ./dist/index.js   --name koa78 -i 2 -- config configali.json",
     "postpublish2": "git push origin --all && git push origin --tags",
     "postversion2": "npm publish --access public",
@@ -57,12 +59,12 @@
   "dependencies": {
     "@www778878net/koa78-base78": "^0.8.2",
     "@www778878net/koa78-upinfo": "^0.0.105",
+    "@www778878net/koabody78": "^3.3.9",
     "@www778878net/promise78": "^0.0.2",
     "@www778878net/redis78": "^0.1.1",
     "co": "^4.6.0",
     "dayjs": "^1.11.6",
     "koa": "^2.13.4",
-    "koa-better-body": "^3.3.9",
     "koa-bodyparser": "^4.3.0",
     "koa-convert": "^2.0.0",
     "koa-router": "^12.0.0"

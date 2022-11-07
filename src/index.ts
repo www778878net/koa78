@@ -29,18 +29,18 @@ function loadjson(filepath) {
 
 let port = 88;
 const convert = require('koa-convert');
-console.log("Config78.location")
+//console.log("Config78.location")
 switch (Config78.location) {
     case "qq":
-        console.log("koa-bodyparser")
+        //console.log("koa-bodyparser")
         //腾迅云用上面那个PYTHON就报错 BadRequestError: invalid urlencoded received
         const bodyParser = require("koa-bodyparser");
         app.use(bodyParser({ multipart: true }));
         break;
     default:
-        console.log("use koa-better-body")
+        //console.log("use koa-better-body")
         //阿里云用这个OK
-        const body = require('koa-better-body');
+        const body = require('@www778878net/koabody78');
         app.use(convert(body()));
         break;
 }
