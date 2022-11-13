@@ -27,6 +27,109 @@ class lovers extends koa78_base78_1.Base78 {
         this.cols = this.colsImp.concat(this.colsremark);
     }
     /**
+      * 微信登录
+      */
+    loginWeixin() {
+        const self = this;
+        const up = self.up;
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield this._upcheck();
+            }
+            catch (e) {
+                //reject(e);
+                //return;
+            }
+            let authcode = up.pars[0];
+            let back, openid;
+            back = yield self.apiqq._code2token(authcode);
+            if (back["errcode"] == 40163) {
+                back = "";
+                self._setBack(-4, "code已被使用");
+                resolve(back);
+                return;
+            }
+            if (back["errcode"] == 40029) {
+                back = "";
+                self._setBack(-5, "code无效");
+                resolve(back);
+                return;
+            }
+            ////await self._addWarn(JSON.stringify(back), "loginWeixin18", "monitor", "lovers");
+            let weixinback = back;
+            openid = back["openid"];
+            //await self._addWarn(openid, "loginWeixin18", "monitor", "lovers");
+            if (openid == undefined) {
+                self._setBack(-3, "");
+                resolve(back);
+                return;
+            }
+            back = yield self._loginWeixin(openid);
+            back["weixinback"] = weixinback;
+            resolve(back);
+        }));
+    }
+    //返回CODE200 用户登录信息 CODE: 1为未注册 CODE为2为没手机号
+    _loginWeixin(openid) {
+        const self = this;
+        const up = self.up;
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield this._upcheck();
+            }
+            catch (e) {
+                //reject(e);
+                //return;
+            }
+            let cmds = [];
+            let values = [];
+            let errtexts = [];
+            let back;
+            let sid = up.getNewid();
+            let uname = openid;
+            //await self._addWarn(uname, "loginWeixin18", "monitor", "lovers");
+            if (!openid) {
+                back = "openid error" + openid;
+                self._setBack(-9, back);
+                resolve(back);
+                return;
+            }
+            let sb = "SELECT  pwd ,uname, coname,nickname,money78,truename, " +
+                " mobile, sid_web, idcodef,openweixin,referrer,isvip, " +
+                " lovers.id,lovers.idpk FROM lovers LEFT OUTER JOIN " +
+                "   companys ON lovers.idcodef = companys.id where  openweixin=?" +
+                "  order by lovers.uptime desc";
+            let tb = yield self.mysql.doGet(sb, [uname], up);
+            //await self._addWarn(JSON.stringify(tb), "loginWeixin18", "monitor", "lovers");
+            if (tb.length == 0) {
+                uname = openid;
+                let sb2 = " INSERT INTO  lovers  ( uname,pwd,sid,sid_web,"
+                    + " sid_web_date, id, upby, uptime"
+                    + "  , idcodef, mobile,  truename,openweixin,email) values(?, ?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                let values = [openid, up.mid, sid, sid,
+                    dayjs().add(7, 'day').format('YYYY-MM-DD HH:mm:ss'), sid, uname, up.utime,
+                    self.cidguest, "", "", openid, ""];
+                back = yield self.mysql1.doM(sb2, values, up);
+                tb = yield self.mysql.doGet(sb, [uname], up);
+                resolve(tb[0]);
+                //back = openid
+                //self._setBack(1, back)
+                //resolve(back)
+                return;
+            }
+            else {
+                tb = tb[0];
+                yield self.memcache.del(self.mem_sid + tb["sid_web"]);
+                sb = 'UPDATE lovers SET sid_web=?,sid_web_date=?,uptime=? WHERE openweixin=?';
+                values = [sid, dayjs().add(7, 'day').format('YYYY-MM-DD HH:mm:ss'), dayjs().format('YYYY-MM-DD HH:mm:ss'), uname];
+                yield self.mysql.doM(sb, values, up);
+                tb["sid_web"] = sid;
+                back = tb;
+            }
+            resolve(back);
+        }));
+    }
+    /**
    * 登录
    */
     login() {
@@ -49,10 +152,10 @@ class lovers extends koa78_base78_1.Base78 {
                 reject("err:登录次失败,24小时后再试!" + love_loginerr);
                 return;
             }
-            var sb = 'SELECT pwd ,uname, coname, sid_web, idcodef   FROM lovers LEFT OUTER JOIN      companys ON lovers.idcodef = companys.id ' +
+            var sbin = 'SELECT pwd ,uname, coname, sid_web, idcodef,lovers.idpk   FROM lovers LEFT OUTER JOIN      companys ON lovers.idcodef = companys.id ' +
                 'where  uname=? ';
             let sid = up.getNewid();
-            let tb = yield self.mysql1.doGet(sb, [uname], up);
+            let tb = yield self.mysql1.doGet(sbin, [uname], up);
             let values;
             if (tb.length == 0) {
                 ////新增用户
@@ -65,9 +168,7 @@ class lovers extends koa78_base78_1.Base78 {
                 var sb = " INSERT INTO  lovers  (cid, uname,pwd,sid,sid_web,sid_web_date,id,upby,uptime,idcodef) SELECT ?,?,?,?,?,?,?,?,?,?";
                 values = ["", uname, pwd, sid, sid, dayjs().add(7, 'day').format('YYYY-MM-DD HH:mm:ss'), sid, uname, up.utime, self.cidguest];
                 back = yield self.mysql1.doM(sb, values, up);
-                sb = 'SELECT pwd ,uname, coname, sid_web, idcodef   FROM lovers LEFT OUTER JOIN      companys ON lovers.idcodef = companys.id ' +
-                    'where  uname=? ';
-                let tb = yield self.mysql1.doGet(sb, [uname], up);
+                let tb = yield self.mysql1.doGet(sbin, [uname], up);
                 back = tb[0];
                 resolve(back);
                 return;

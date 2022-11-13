@@ -11,6 +11,17 @@ export default class Test78 extends Base78 {
         this.cols = this.colsImp.concat(this.colsremark);
     }
 
+    testcidmy() {
+        const self = this;
+        const up = self.up;
+
+        return new Promise(async (resolve, reject) => {
+
+            resolve(self.cidmy);
+            return;
+        });
+    }
+
     testmem(): Promise<string> {
         const self = this;
         const up = self.up;

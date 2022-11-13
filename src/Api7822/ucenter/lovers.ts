@@ -1,5 +1,5 @@
 ﻿import dayjs = require("dayjs");
-import { Base78 }from  "@www778878net/koa78-base78";
+import { Base78 } from "@www778878net/koa78-base78";
 
 
 
@@ -9,17 +9,129 @@ export default class lovers extends Base78 {
         super(ctx);
         //this.uidcid = "uid";
         this.tbname = "lovers";
-         
+
         this.colsImp = [
             //用户名 密码 客户端鉴权
             "uname", "pwd", "sid",
             //网页端鉴权 网页端过期时间（暂未用）
-            "sid_web", "sid_web_date", 
+            "sid_web", "sid_web_date",
             //当前cid 
             "idcodef"
         ];
         this.cols = this.colsImp.concat(this.colsremark);
     }
+
+    /**
+      * 微信登录
+      */
+    loginWeixin(): Promise<string> {
+        const self = this;
+        const up = self.up;
+
+        return new Promise(async (resolve, reject) => {
+            try {
+                await this._upcheck();
+            } catch (e) {
+                //reject(e);
+                //return;
+            }
+
+            let authcode = up.pars[0];
+            let back, openid;
+            back = await self.apiqq._code2token(authcode);
+            if (back["errcode"] == 40163) {
+                back = ""
+                self._setBack(-4, "code已被使用")
+                resolve(back)
+                return;
+            }
+            if (back["errcode"] == 40029) {
+                back = ""
+                self._setBack(-5, "code无效")
+                resolve(back)
+                return;
+            }
+
+            ////await self._addWarn(JSON.stringify(back), "loginWeixin18", "monitor", "lovers");
+            let weixinback = back;
+            openid = back["openid"]
+            //await self._addWarn(openid, "loginWeixin18", "monitor", "lovers");
+            if (openid == undefined) {
+                self._setBack(-3, "")
+                resolve(back)
+                return;
+            }
+            back = await self._loginWeixin(openid);
+            back["weixinback"] = weixinback;
+            resolve(back);
+
+        })
+    }
+
+    //返回CODE200 用户登录信息 CODE: 1为未注册 CODE为2为没手机号
+    _loginWeixin(openid): Promise<string> {
+        const self = this;
+        const up = self.up;
+
+        return new Promise(async (resolve, reject) => {
+            try {
+                await this._upcheck();
+            } catch (e) {
+                //reject(e);
+                //return;
+            }
+            let cmds = [];
+            let values: any = [];
+            let errtexts = [];
+
+            let back;
+            let sid = up.getNewid();
+            let uname = openid;
+            //await self._addWarn(uname, "loginWeixin18", "monitor", "lovers");
+            if (!openid) {
+                back = "openid error" + openid
+                self._setBack(-9, back)
+                resolve(back)
+                return;
+            }
+            let sb = "SELECT  pwd ,uname, coname,nickname,money78,truename, " +
+                " mobile, sid_web, idcodef,openweixin,referrer,isvip, " +
+                " lovers.id,lovers.idpk FROM lovers LEFT OUTER JOIN " +
+                "   companys ON lovers.idcodef = companys.id where  openweixin=?" +
+                "  order by lovers.uptime desc";
+            let tb = await self.mysql.doGet(sb, [uname], up);
+            //await self._addWarn(JSON.stringify(tb), "loginWeixin18", "monitor", "lovers");
+            if (tb.length == 0) {
+                uname = openid
+                let sb2 = " INSERT INTO  lovers  ( uname,pwd,sid,sid_web,"
+                    + " sid_web_date, id, upby, uptime"
+                    + "  , idcodef, mobile,  truename,openweixin,email) values(?, ?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                let values = [openid, up.mid, sid, sid
+                    , dayjs().add(7, 'day').format('YYYY-MM-DD HH:mm:ss'), sid, uname, up.utime
+                    , self.cidguest, "", "", openid, ""];
+                back = await self.mysql1.doM(sb2, values, up);
+                tb = await self.mysql.doGet(sb, [uname], up);
+                resolve(tb[0])
+                //back = openid
+                //self._setBack(1, back)
+                //resolve(back)
+                return
+            }
+            else {
+                tb = tb[0];
+                await self.memcache.del(self.mem_sid + tb["sid_web"]);
+                sb = 'UPDATE lovers SET sid_web=?,sid_web_date=?,uptime=? WHERE openweixin=?';
+                values = [sid, dayjs().add(7, 'day').format('YYYY-MM-DD HH:mm:ss'), dayjs().format('YYYY-MM-DD HH:mm:ss'), uname];
+                await self.mysql.doM(sb, values, up);
+
+                tb["sid_web"] = sid
+                back = tb
+            }
+
+            resolve(back)
+        });
+    }
+
 
     /**
    * 登录
@@ -45,10 +157,10 @@ export default class lovers extends Base78 {
                 reject("err:登录次失败,24小时后再试!" + love_loginerr);
                 return;
             }
-            var sb = 'SELECT pwd ,uname, coname, sid_web, idcodef   FROM lovers LEFT OUTER JOIN      companys ON lovers.idcodef = companys.id ' +
+            var sbin = 'SELECT pwd ,uname, coname, sid_web, idcodef,lovers.idpk   FROM lovers LEFT OUTER JOIN      companys ON lovers.idcodef = companys.id ' +
                 'where  uname=? ';
             let sid = up.getNewid();
-            let tb = await self.mysql1.doGet(sb, [uname], up);
+            let tb = await self.mysql1.doGet(sbin, [uname], up);
             let values: string[];
             if (tb.length == 0) {
                 ////新增用户
@@ -59,18 +171,17 @@ export default class lovers extends Base78 {
                     return;
                 }
                 var sb = " INSERT INTO  lovers  (cid, uname,pwd,sid,sid_web,sid_web_date,id,upby,uptime,idcodef) SELECT ?,?,?,?,?,?,?,?,?,?";
-                values = ["",uname, pwd, sid, sid, dayjs().add(7, 'day').format('YYYY-MM-DD HH:mm:ss'), sid, uname, up.utime, self.cidguest];
+                values = ["", uname, pwd, sid, sid, dayjs().add(7, 'day').format('YYYY-MM-DD HH:mm:ss'), sid, uname, up.utime, self.cidguest];
                 back = await self.mysql1.doM(sb, values, up);
 
-                sb = 'SELECT pwd ,uname, coname, sid_web, idcodef   FROM lovers LEFT OUTER JOIN      companys ON lovers.idcodef = companys.id ' +
-                    'where  uname=? '; 
-                let tb = await self.mysql1.doGet(sb, [uname], up);
+
+                let tb = await self.mysql1.doGet(sbin, [uname], up);
                 back = tb[0]
                 resolve(back);
                 return;
             } else {
                 let result = tb[0];
-           
+
                 if (pwd !== result["pwd"]) {
                     back = ['err:用户名密码不正确', '用户名密码不正确'];
                     if (uname != "guest") {
@@ -99,10 +210,10 @@ export default class lovers extends Base78 {
                     values = [sid, dayjs().add(7, 'day').format('YYYY-MM-DD HH:mm:ss'), up.utime, uname];
                     self.mysql.doM(sb, values, up);
                 }
-          
+
                 result["sid_web"] = sid
                 back = result
-          
+
                 resolve(back);
             }
 
@@ -150,7 +261,7 @@ export default class lovers extends Base78 {
             //await self._addWarn("getMobileVzReg:" + sjnum, "lovers", "lovers", "lovers");
             await self.memcache.set(self.tbname + "mobileyz" + mobile, sjnum);
 
-            let back=sjnum
+            let back = sjnum
 
             //暂时没有接短信服务 直接返回先 后面要处理
             //let sb = 'insert into `services_mes_sms` (`uid`,`uname`,`mid`,`ddate`,tou,template,content,`upby`,`uptime`,`id`) ' +
@@ -158,12 +269,12 @@ export default class lovers extends Base78 {
             //let back = await self.mysql.doM(sb, [up.uid, up.uname, "mobileyz"
             //    , up.utime, mobile, "SMS_168591175", "{\"code\":" + sjnum + "}", up.uname, up.utime, up.getNewid()], up);
             //back = "验证码已发出 请注意接收.";
-    
+
             resolve(back);
         });
     }
 
- 
+
     /**
     * 注册
     */
@@ -193,7 +304,7 @@ export default class lovers extends Base78 {
 
             //验证码有没 是否和手机对应
             let sjnum = await self.memcache.get(self.tbname + "mobileyz" + mobile);
-            if (sjnum != mobilevz  ) {
+            if (sjnum != mobilevz) {
                 resolve('err:验证码不正确!请验证手机!');
                 return;
             }
@@ -214,7 +325,7 @@ export default class lovers extends Base78 {
                     + " sid_web_date, id, upby, uptime"
                     + "  , idcodef, mobile, qq, truename,openweixin,email) values(?, ?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 let values = [uname, pwd, sid, sid
-                    , dayjs().add(7,'day').format('YYYY-MM-DD HH:mm:ss'), sid, uname, up.utime
+                    , dayjs().add(7, 'day').format('YYYY-MM-DD HH:mm:ss'), sid, uname, up.utime
                     , sid, mobile, qq, truename, openwx, qq + "@qq.com"];
                 back = await self.mysql1.doMAdd(sb, values, up);
                 if (back) {
