@@ -396,4 +396,29 @@ CREATE TABLE `testtb5`  (
   INDEX `i_kind_item`(`kind`, `item`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
+DROP TABLE IF EXISTS `pars_co`;
+CREATE TABLE `pars_co` (
+  `cid` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `item` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `data` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `d2` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `d3` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `d4` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `d5` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `d6` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `upby` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `uptime` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `idpk` int NOT NULL AUTO_INCREMENT,
+  `id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `remark` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `remark2` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `remark3` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `remark4` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `remark5` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `remark6` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`idpk`),
+  UNIQUE KEY `i_id` (`id`),
+  UNIQUE KEY `u_item` (`cid`,`item`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+
 SET FOREIGN_KEY_CHECKS = 1;
