@@ -14,6 +14,8 @@ const koa78_base78_1 = require("@www778878net/koa78-base78");
 class lovers extends koa78_base78_1.Base78 {
     constructor(ctx) {
         super(ctx);
+        this.mem_sid = "lovers_sid3_"; //保存用户N个ID 方便修改 千万不能改为lovers_sid_
+        this.mem_errid = "love_loginerr2_"; //用户登录失败 缓存KEY
         //this.uidcid = "uid";
         this.tbname = "lovers";
         this.colsImp = [
@@ -25,6 +27,153 @@ class lovers extends koa78_base78_1.Base78 {
             "idcodef"
         ];
         this.cols = this.colsImp.concat(this.colsremark);
+    }
+    /**
+    * 客户端登录
+    */
+    loginPro() {
+        const self = this;
+        const up = self.up;
+        const loginerr = "love_loginerr2_";
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield this._upcheck();
+            }
+            catch (e) {
+                //reject(e);
+                //return;
+            }
+            var uname = up.pars[0].trim();
+            var pwd = up.pars[1];
+            let back = "";
+            let love_loginerr = yield self.memcache.get(loginerr + uname);
+            if (love_loginerr >= 5) {
+                back = "登录5次失败,24小时后再试!";
+                self._setBack(-5, back);
+                resolve(back);
+                return;
+            }
+            let sb = "SELECT lovers.*,companys.coname from lovers LEFT OUTER JOIN   companys ON lovers.idcodef = companys.id " +
+                "where  uname=?    order by  lovers.uptime desc limit 1";
+            let sid = up.getNewid();
+            let tb = yield self.mysql1.doGet(sb, [uname], up);
+            let values;
+            if (tb.length == 0) {
+                //新增用户
+                sb = " INSERT INTO  lovers  ( uname,pwd,sid,sid_web,"
+                    + " sid_web_date, id, upby, uptime"
+                    + "  , idcodef, mobile,  truename"
+                    + ",openweixin,email,referrer)"
+                    + " values(?,?,?,?  ,?,?,?,? ,?,?,?  ,?,?,?)";
+                let values = [uname, pwd, sid, sid,
+                    dayjs().add(7, 'day').format('YYYY-MM-DD HH:mm:ss'), sid, uname, up.utime,
+                    self.cidguest, "", "", "", "", "", ""];
+                back = yield self.mysql1.doM(sb, values, up);
+                if (!back) {
+                    self._setBack(-1, "注册失败");
+                    reject("err:重复用户名!");
+                    return;
+                }
+                back = [sid, self.cidguest, "测试帐套",
+                    sid, back];
+                if (up.v >= 18.1) {
+                    back = {
+                        sid: sid,
+                        idcodef: self.cidguest,
+                        coname: "测试帐套",
+                        oldsid: sid,
+                        uname: uname
+                    };
+                }
+                resolve(back);
+                return;
+            }
+            else {
+                let result = tb[0];
+                if (pwd !== result["pwd"]) {
+                    back = "用户名密码不正确!";
+                    self._setBack(-2, back);
+                    if (uname != "guest") {
+                        if (!love_loginerr)
+                            self.memcache.set(self.mem_errid + uname, 1, 3600);
+                        else
+                            self.memcache.incr(self.mem_errid + uname);
+                    }
+                    resolve(back);
+                    return;
+                }
+                else {
+                    self.memcache.del(loginerr + uname);
+                }
+                if (result["idcodef"] === null) {
+                    result["idcodef"] = self.cidguest;
+                    result["coname"] = "测试帐套-可进入基础数据建立帐套";
+                }
+                if (uname == 'guest') {
+                    sid = 'GUEST888-8888-8888-8888-GUEST88GUEST';
+                }
+                else if (uname.indexOf("sys") == 0) {
+                    sid = result["sid"];
+                }
+                else {
+                    self.memcache.del(self.mem_sid + result["sid"]);
+                    sb = 'UPDATE lovers SET sid=?, uptime=? WHERE uname=?';
+                    values = [sid, dayjs().format('YYYY-MM-DD HH:mm:ss'), uname];
+                    self.mysql.doM(sb, values, up);
+                }
+                result["sid"] = sid;
+                if (up.v >= 18.1) {
+                    back = {
+                        sid: sid,
+                        idcodef: result["idcodef"],
+                        coname: result["coname"],
+                        oldsid: result["sid"],
+                        uname: result["uname"],
+                        idpk: result["idpk"]
+                    };
+                }
+                else
+                    back = result;
+                //back = {
+                //    msg: 1
+                //    , rsp: [sid, result["idcodef"], result["coname"], result["sid_web"]
+                //        , result["money78"], result["mobile"]
+                //        , result["truename"], result["uname"]
+                //        , result["idpk"], result["idcard"], result["isvip"]
+                //        , result["dleave"]]
+                //};
+                resolve(back);
+            }
+        }));
+    }
+    loginWxSmall() {
+        const self = this;
+        const up = self.up;
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield this._upcheck();
+            }
+            catch (e) {
+                //reject(e);
+                //return;
+            }
+            let authcode = up.pars[0];
+            let back;
+            back = yield self.apiwxsmall.code2Session(authcode);
+            let backobj = JSON.parse(back);
+            console.log("loginWxSmall:");
+            console.log(backobj);
+            let openid = backobj["openid"];
+            console.log(openid);
+            if (!openid) {
+                back = "openid 不存在";
+                self._setBack(-1, back);
+                resolve(back);
+                return;
+            }
+            back = yield self._loginWeixin(openid);
+            resolve(back);
+        }));
     }
     /**
       * 微信登录
@@ -43,6 +192,8 @@ class lovers extends koa78_base78_1.Base78 {
             let authcode = up.pars[0];
             let back, openid;
             back = yield self.apiqq._code2token(authcode);
+            //console.log("_code2token:")
+            //console.log(back)
             if (back["errcode"] == 40163) {
                 back = "";
                 self._setBack(-4, "code已被使用");
@@ -59,12 +210,15 @@ class lovers extends koa78_base78_1.Base78 {
             let weixinback = back;
             openid = back["openid"];
             //await self._addWarn(openid, "loginWeixin18", "monitor", "lovers");
-            if (openid == undefined) {
-                self._setBack(-3, "");
+            if (!openid) {
+                back = "openid 不存在";
+                self._setBack(-3, back);
                 resolve(back);
                 return;
             }
             back = yield self._loginWeixin(openid);
+            //console.log("back:")
+            //console.log(back)
             back["weixinback"] = weixinback;
             resolve(back);
         }));
@@ -94,8 +248,8 @@ class lovers extends koa78_base78_1.Base78 {
                 resolve(back);
                 return;
             }
-            let sb = "SELECT  pwd ,uname, coname,nickname,money78,truename, " +
-                " mobile, sid_web, idcodef,openweixin,referrer,isvip, " +
+            let sb = "SELECT  pwd ,uname, coname,money78,truename, " +
+                " mobile, sid_web, idcodef,openweixin,referrer, " +
                 " lovers.id,lovers.idpk FROM lovers LEFT OUTER JOIN " +
                 "   companys ON lovers.idcodef = companys.id where  openweixin=?" +
                 "  order by lovers.uptime desc";
@@ -105,7 +259,7 @@ class lovers extends koa78_base78_1.Base78 {
                 uname = openid;
                 let sb2 = " INSERT INTO  lovers  ( uname,pwd,sid,sid_web,"
                     + " sid_web_date, id, upby, uptime"
-                    + "  , idcodef, mobile,  truename,openweixin,email) values(?, ?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    + "  , idcodef, mobile,  truename,openweixin ,email) values(?,?,?,? ,?,?,?,?, ?,?,?,?,? )";
                 let values = [openid, up.mid, sid, sid,
                     dayjs().add(7, 'day').format('YYYY-MM-DD HH:mm:ss'), sid, uname, up.utime,
                     self.cidguest, "", "", openid, ""];

@@ -22,6 +22,37 @@ class companysuser extends koa78_base78_1.Base78 {
         this.colsImp = ["uid", "des"];
         this.cols = this.colsImp.concat(this.colsremark);
     }
+    del() {
+        const self = this;
+        const up = self.up;
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield this._upcheck();
+            }
+            catch (e) {
+                reject(e);
+                return;
+            }
+            let sb, values, back;
+            if (up.idceo != up.uid) {
+                back = "err:只有帐套创建人可以修改";
+                self._setBack(-1, back);
+                resolve(back);
+                return;
+            }
+            sb = 'SELECT uid,cid FROM  ' + self.tbname + ' WHERE id=? ';
+            values = [up.mid];
+            let tb = yield self.mysql1Get(sb, values);
+            if (tb && tb[0]["uid"] == up.uid) {
+                back = "err:不能删除自己";
+                self._setBack(-2, back);
+                resolve(back);
+                return;
+            }
+            let back2 = yield self._del();
+            resolve(back2);
+        }));
+    }
     getWeixin() {
         const self = this;
         const up = self.up;

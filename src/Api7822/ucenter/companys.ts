@@ -27,6 +27,9 @@ export default class companys extends Base78  {
 
             let colp = ["coname"];
             let back = await self._m(colp)
+            //添加账套成员表
+            let sb = "insert into companysuser (cid,uid,id,upby,uptime) values (?,?,?,?,?)";
+            let backs = await self.mysql.doM(sb, [up.mid, up.uid, up.getNewid(), up.uname, up.utime], up);
             resolve(back)
  
         })

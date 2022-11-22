@@ -36,6 +36,9 @@ class companys extends koa78_base78_1.Base78 {
             }
             let colp = ["coname"];
             let back = yield self._m(colp);
+            //添加账套成员表
+            let sb = "insert into companysuser (cid,uid,id,upby,uptime) values (?,?,?,?,?)";
+            let backs = yield self.mysql.doM(sb, [up.mid, up.uid, up.getNewid(), up.uname, up.utime], up);
             resolve(back);
         }));
     }

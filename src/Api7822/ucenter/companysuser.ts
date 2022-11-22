@@ -1,4 +1,6 @@
 ﻿import { Base78 } from "@www778878net/koa78-base78";
+
+ 
 /**
  *公司成员
  */
@@ -12,6 +14,40 @@ export default class companysuser extends Base78  {
         //uid
         this.colsImp = ["uid","des"];
         this.cols = this.colsImp.concat(this.colsremark);
+    }
+
+    del(): Promise<string> {
+        const self = this;
+        const up = self.up;
+        return new Promise(async (resolve, reject) => {
+            try {
+                await this._upcheck();
+            } catch (e) {
+                reject(e);
+                return;
+            }
+            let sb, values, back;
+            if (up.idceo != up.uid) { 
+                back = "err:只有帐套创建人可以修改";
+                self._setBack(-1,back) 
+                resolve(back);
+                return;
+            }
+            sb = 'SELECT uid,cid FROM  '+self.tbname+' WHERE id=? ';
+            values = [up.mid];
+            let tb = await self.mysql1Get(sb, values);
+            if (tb && tb[0]["uid"] == up.uid) {
+                back = "err:不能删除自己";
+                self._setBack(-2, back) 
+                resolve(back);
+                return;
+            }
+           
+ 
+            let back2 = await self._del();
+
+            resolve(back2);
+        })
     }
 
     getWeixin(): Promise<string> {
@@ -50,6 +86,8 @@ export default class companysuser extends Base78  {
             resolve(back);
         })
     }
+
+    
 
     m(): Promise<string> {
         const self = this;
