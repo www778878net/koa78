@@ -1,6 +1,6 @@
 {
   "name": "@www778878net/koa78",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "nodejs koa78封装",
   "main": "dist/index.js",
   "types": "src/index.ts",
@@ -56,7 +56,7 @@
     "typescript": "^4.8.4"
   },
   "dependencies": {
-    "@www778878net/koa78-base78": "^0.11.1",
+    "@www778878net/koa78-base78": "^0.11.2",
     "@www778878net/koa78-upinfo": "^0.0.105",
     "@www778878net/koabody78": "^3.3.9",
     "@www778878net/memcache78": "^0.0.5",
