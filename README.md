@@ -12,7 +12,7 @@
 
 ## 本项目是DEMO不用经常更新,用户直接下载后在此基础上直接写业务代码 [开源框架源码](https://github.com/www778878net/koa78-base78)
 ## API文档地址：[http://www.778878.net/docs/#/koa78/](http://www.778878.net/docs/#/koa78/)
-## 免费远程协助: [阿里云大使绑定推荐关系,即可免费协助购买和安装](https://www.aliyun.com/minisite/goods?userCode=2ty2vxdh)
+## 免费远程协助: [阿里云大使绑定推荐关系,免费协助购买云服务器和安装架构](https://www.aliyun.com/minisite/goods?userCode=2ty2vxdh)
 ## 反馈qq群(点击加群)：[323397913](https://qm.qq.com/cgi-bin/qm/qr?k=it9gUUVdBEDWiTOH21NsoRHAbE9IAzAO&jump_from=webapi&authKey=KQwSXEPwpAlzAFvanFURm0Foec9G9Dak0DmThWCexhqUFbWzlGjAFC7t0jrjdKdL)
 
 ## 背景 
