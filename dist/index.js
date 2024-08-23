@@ -1,8 +1,11 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const Koa = require("koa");
 //import Config78 from "./Config78";
-const routers_1 = require("./routers");
+const routers_1 = __importDefault(require("./routers"));
 const app = new Koa();
 var iconv = require('iconv-lite');
 var fs = require('fs');

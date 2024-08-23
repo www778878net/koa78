@@ -24,8 +24,8 @@ class companys extends koa78_base78_1.Base78 {
         this.cols = this.colsImp.concat(this.colsremark);
     }
     m() {
-        const self = this;
-        const up = self.up;
+        const that = this;
+        const up = that.up;
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             try {
                 yield this._upcheck();
@@ -34,11 +34,11 @@ class companys extends koa78_base78_1.Base78 {
                 reject(e);
                 return;
             }
-            let colp = ["coname"];
-            let back = yield self._m(colp);
+            const colp = ["coname"];
+            const back = yield that._m(colp);
             //添加账套成员表
-            let sb = "insert into companysuser (cid,uid,id,upby,uptime) values (?,?,?,?,?)";
-            let backs = yield self.mysql.doM(sb, [up.mid, up.uid, up.getNewid(), up.uname, up.utime], up);
+            const sb = "insert into companysuser (cid,uid,id,upby,uptime) values (?,?,?,?,?)";
+            const backs = yield that.mysql.doM(sb, [up.mid, up.uid, up.getNewid(), up.uname, up.utime], up);
             resolve(back);
         }));
     }
@@ -53,19 +53,19 @@ class companys extends koa78_base78_1.Base78 {
                 reject(e);
                 return;
             }
-            let idpk = up.pars[0]; //用户的idpk
+            const idpk = up.pars[0]; //用户的idpk
             let sb;
             let back;
             sb = "SELECT `sid`,`uname`   FROM `lovers` WHERE `idpk` =?";
             back = yield self.mysql.doGet(sb, [idpk], up);
-            let cidnew = back[0]['sid'];
-            let uname = back[0]['uname'];
+            const cidnew = back[0]['sid'];
+            const uname = back[0]['uname'];
             //添加账套表
             sb = "INSERT INTO companys(uid,coname,id,upby,uptime) values (?,?,?,?,?)";
             back = yield self.mysql.doM(sb, [cidnew, uname, cidnew, uname, up.utime], up);
             //添加账套成员表
             sb = "insert into companysuser (cid,uid,id,upby,uptime) values (?,?,?,?,?)";
-            let backs = yield self.mysql.doM(sb, [cidnew, cidnew, cidnew, uname, up.utime], up);
+            const backs = yield self.mysql.doM(sb, [cidnew, cidnew, cidnew, uname, up.utime], up);
             if (back == 1 && backs == 1) {
                 back = "添加成功";
             }
@@ -86,8 +86,8 @@ class companys extends koa78_base78_1.Base78 {
                 reject(e);
                 return;
             }
-            let sb = "SELECT uid FROM companys WHERE id=?";
-            let tb = yield self.mysql.doGet(sb, [up.cid], up);
+            const sb = "SELECT uid FROM companys WHERE id=?";
+            const tb = yield self.mysql.doGet(sb, [up.cid], up);
             let back = tb[0]["uid"];
             if (back === up.uid)
                 back = up.sid;
@@ -105,11 +105,11 @@ class companys extends koa78_base78_1.Base78 {
                 reject(e);
                 return;
             }
-            let sb = "SELECT companys.coname, companys.remark,  companys.remark2, companys.remark3, companys.remark4," +
+            const sb = "SELECT companys.coname, companys.remark,  companys.remark2, companys.remark3, companys.remark4," +
                 "companys.remark5, companys.remark6, companys.id, companys.upby, companys.uptime, companys.uid" +
                 "        FROM companys inner JOIN companysuser ON companysuser.cid= companys.id" +
                 '   WHERE companysuser.uid=?      ';
-            let back = yield self.mysql1.doGet(sb, [up.uid], up);
+            const back = yield self.mysql1.doGet(sb, [up.uid], up);
             resolve(back);
         }));
     }
@@ -129,7 +129,7 @@ class companys extends koa78_base78_1.Base78 {
                 return;
             }
             self.memcache.del(self.mem_sid + up.sid);
-            let sb = 'UPDATE lovers set idcodef=? ,uptime=? WHERE ID=?';
+            const sb = 'UPDATE lovers set idcodef=? ,uptime=? WHERE ID=?';
             let back = yield self.mysql.doM(sb, [up.mid, up.utime, up.uid], up);
             if (back == 1)
                 back = up.mid;
@@ -153,7 +153,7 @@ class companys extends koa78_base78_1.Base78 {
                 resolve("err:帐套名称不存在!");
                 return;
             }
-            let newcid = back[0]["id"];
+            const newcid = back[0]["id"];
             //验证权限
             sb = "select idpk from companysuser where cid=? and uid=?";
             back = yield self.mysql.doGet(sb, [newcid, up.uid], up);
@@ -163,7 +163,7 @@ class companys extends koa78_base78_1.Base78 {
             }
             self.memcache.del("lovers_sid_" + up.sid);
             sb = 'UPDATE lovers set idcodef=? ,uptime=? WHERE ID=?';
-            var values = [newcid, up.uptime, up.uid];
+            const values = [newcid, up.uptime, up.uid];
             let back2 = yield self.mysql.doM(sb, values, up);
             if (back2 == 1)
                 back2 = up.mid;
