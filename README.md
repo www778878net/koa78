@@ -14,7 +14,7 @@
 ## API文档地址：[http://www.778878.net/docs/#/koa78/](http://www.778878.net/docs/#/koa78/)
 ## 免费远程协助: [阿里云大使绑定推荐关系,免费协助购买云服务器和安装架构](https://www.aliyun.com/minisite/goods?userCode=2ty2vxdh)
 ## 反馈qq群(点击加群)：[323397913](https://qm.qq.com/cgi-bin/qm/qr?k=it9gUUVdBEDWiTOH21NsoRHAbE9IAzAO&jump_from=webapi&authKey=KQwSXEPwpAlzAFvanFURm0Foec9G9Dak0DmThWCexhqUFbWzlGjAFC7t0jrjdKdL)
-
+## 合作联系:[投资 打赏 顾问 兼职](http://wpa.qq.com/msgrd?v=3&uin=657225485&site=qq&menu=ye)
 ## 背景 
 1. 十八年ERP开发经验 十年云开发经验 十五年股票期货投资经验 十年投资分析平台开发经验
 2. 了解业务 擅长解决生产经营实际问题
